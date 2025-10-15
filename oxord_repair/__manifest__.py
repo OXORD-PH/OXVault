@@ -6,8 +6,10 @@
     'author': 'OXORD Computer Solutions',
     'depends': ['repair', 'base', 'stock'],
     'data': [
-        'security/groups.xml',
+        'data/hr_department_data.xml',
+        'data/repair_unit_type_data.xml',
         'security/ir.model.access.csv',
+        'security/groups.xml',
         'views/repair_order_view.xml',
         'views/repair_order_tree_view.xml',
         'views/res_partner_views.xml',
@@ -16,11 +18,10 @@
         'views/repair_menu.xml',
         'reports/repairorder_report.xml',
         'reports/repairorder_report_action.xml',
-        'data/repair_unit_type_data.xml',
         'data/product_brand_data.xml',
         'data/product_model_data.xml',
         'data/repair_sequence.xml',
-        'data/hr_department_data.xml',
+
     ],
     'assets': {
         'web.assets_backend': [
