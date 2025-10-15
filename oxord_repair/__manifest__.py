@@ -8,8 +8,8 @@
     'data': [
         'data/hr_department_data.xml',
         'data/repair_unit_type_data.xml',
-        'security/ir.model.access.csv',
         'security/groups.xml',
+        'security/ir.model.access.csv',
         'views/repair_order_view.xml',
         'views/repair_order_tree_view.xml',
         'views/res_partner_views.xml',
