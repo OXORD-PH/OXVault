@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+
+    <!-- Parent Menu: Services -->
+    <menuitem id="menu_repair_services" name="OXORD Services"
+              sequence="10"
+              groups="oxord_repair.group_repair_coordinator,oxord_repair.group_repair_technician"/>
+
+    <!-- Repair Orders Menu for Coordinator -->
+    <menuitem id="repair_order_menu_coordinator" name="OXORD Repair Orders"
+              parent="menu_repair_services"
+              action="repair_order_action"
+              sequence="20"
+              groups="oxord_repair.group_repair_coordinator"/>
+
+    <!-- Repair Orders Menu for Technician -->
+    <menuitem id="repair_order_menu_technician" name="OXORD Repair Orders"
+              parent="menu_repair_services"
+              action="repair_order_action"
+              sequence="30"
+              groups="oxord_repair.group_repair_technician"/>
+
+  </data>
+</odoo>

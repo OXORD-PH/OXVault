@@ -1,0 +1,16 @@
+<odoo>
+    <data noupdate="1">
+        <record id="hr_department_dtlp" model="hr.department">
+            <field name="name">DTLP</field>
+        </record>
+        <record id="hr_department_hhp" model="hr.department">
+            <field name="name">HHP</field>
+        </record>
+        <record id="hr_department_pcav" model="hr.department">
+            <field name="name">PCAV</field>
+        </record>
+        <record id="hr_department_pjt" model="hr.department">
+            <field name="name">PJT</field>
+        </record>
+    </data>
+</odoo>

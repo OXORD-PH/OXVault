@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- Coordinator Group -->
+        <record id="group_repair_coordinator" model="res.groups">
+            <field name="name">Repair Coordinator</field>
+            <field name="category_id" ref="base.module_category_services"/>
+        </record>
+
+        <!-- Technician Group -->
+        <record id="group_repair_technician" model="res.groups">
+            <field name="name">Repair Technician</field>
+            <field name="category_id" ref="base.module_category_services"/>
+        </record>
+
+        <record id="base.user_admin" model="res.users">
+            <field name="groups_id" eval="[(4, ref('oxord_repair.group_repair_coordinator')),
+                                          (4, ref('oxord_repair.group_repair_technician'))]"/>
+        </record>
+
+
+    </data>
+</odoo>

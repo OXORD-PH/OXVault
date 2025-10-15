@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <!-- Inherit the existing contact tag form to add company fields -->
+        <record id="view_res_partner_category_form_custom" model="ir.ui.view">
+            <field name="name">res.partner.category.form.custom</field>
+            <field name="model">res.partner.category</field>
+            <field name="inherit_id" ref="base.view_partner_category_form"/>
+            <field name="arch" type="xml">
+                <!-- Insert after the 'name' field -->
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="type_name"/>
+                    <field name="is_company_type"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
