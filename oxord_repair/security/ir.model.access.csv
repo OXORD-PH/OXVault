@@ -1,9 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_repair_order_admin,access.repair.order.admin,model_repair_order,base.group_system,1,1,1,1
-access_repair_order_technician,access.repair.order.technician,model_repair_order,oxord_repair.group_repair_technician,1,0,0,0
-access_repair_order_coordinator,access.repair.order.coordinator,model_repair_order,oxord_repair.group_repair_coordinator,1,1,1,1
-access_product_brand_admin,access.product.brand.admin,model_product_brand,base.group_system,1,1,1,1
-access_product_brand_user,access.product.brand.user,model_product_brand,,1,0,0,0
-access_product_brand_manager,access.product.brand.manager,model_product_brand,oxord_repair.group_repair_coordinator,1,1,1,1
-access_repair_unit_type_coordinator,access.repair.unit.type.coordinator,model_repair_unit_type,oxord_repair.group_repair_coordinator,1,1,1,1
-access_repair_unit_type_admin,access.repair.unit.type.admin,model_repair_unit_type,base.group_system,1,1,1,1
