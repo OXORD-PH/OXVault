@@ -20,7 +20,8 @@
                         type="object"
                         string="Create Quotation"
                         class="btn-primary"
-                        invisible="quotation_id or state == 'released'"/>
+                        invisible="quotation_id or state == 'released'"
+                <button/>
 
                 <!-- View Quotation: visible only if quotation exists, hidden if done or released -->
                 <button name="action_view_quotation"
@@ -28,7 +29,8 @@
                         string="View Quotation"
                         class="btn-primary"
                         invisible="not quotation_id or state in ('done','released')"/>
-
+                <button/>
+                  
                 <!-- Create Invoice: visible if invoice not created yet, hidden if released -->
                 <button name="action_create_invoice"
                         type="object"
@@ -36,7 +38,8 @@
                         class="btn-primary"
                         invisible="state != 'done' or invoice_ids"
                         groups="oxord_repair.group_repair_coordinator,base.group_system"/>
-
+                <button/>
+                  
                 <!-- Start Repair -->
                 <button name="action_start_repair"
                         type="object"
@@ -44,21 +47,24 @@
                         invisible="state not in ('draft','new')"
                         groups="oxord_repair.group_repair_coordinator,oxord_repair.group_repair_technician,base.group_system"
                         confirm="Are you sure you want to start the repair? Have you got permission from the customer?"/>
-
+                <button/>
+                  
                 <!-- End Repair (trigger wizard) -->
                 <button name="action_open_endorse_wizard"
                         type="object"
                         string="Mark as Done"
                         invisible="state != 'under_repair'"
                         groups="oxord_repair.group_repair_coordinator,oxord_repair.group_repair_technician,base.group_system"/>
-
+                <button/>
+                  
                 <!-- Release -->
                 <button name="action_release"
                         type="object"
                         string="Release"
                         invisible="state != 'done'"
                         groups="oxord_repair.group_repair_coordinator,base.group_system"/>
-
+                <button/>
+                  
                 <!-- Cancel -->
                 <button name="action_cancel"
                         type="object"
@@ -66,20 +72,22 @@
                         invisible="state in ('done','cancel')"
                         groups="base.group_system"
                         confirm="Are you sure you want to cancel this repair?"/>
-
+                <button/>
+                  
                 <!-- Reset to Draft -->
                 <button name="action_reset_to_draft"
                         type="object"
                         string="Reset to Draft"
                         invisible="state not in ('cancel','done')"
                         groups="base.group_system"/>
-                                        
+                <button/>
+                  
                 <!-- Print button: last in line -->
                 <button name="action_print_claim_form"
                         type="object"
                         string="Print"
                         class="btn-primary"/>
-                    
+                <button/>     
 
 
                 <!-- Statusbar -->
