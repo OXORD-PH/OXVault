@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="pos_sales_person.SalesPersonButton" owl="1">
+        <button class="control-button btn btn-light rounded-0 fw-bolder" t-on-click="onClick">
+            <i class="fa fa-user-tie me-1"/>
+            <span>Sales Person</span>
+        </button>
+    </t>
+
+</templates>
