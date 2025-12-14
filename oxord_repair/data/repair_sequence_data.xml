@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- Headquarters Sequence (always JO) -->
+        <record id="seq_repair_hq_jo" model="ir.sequence">
+            <field name="name">HQ Repair Order</field>
+            <field name="code">repair.order.HQ</field>
+            <field name="prefix">HQ/JO/</field>
+            <field name="padding">5</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <!-- OXORD La Hacienda Sequence -->
+        <record id="seq_repair_la_hacienda_carryin" model="ir.sequence">
+            <field name="name">La Hacienda Repair Order Carry-In</field>
+            <field name="code">repair.order.ST4.carryin</field>
+            <field name="prefix">ST4/RO/</field>
+            <field name="padding">5</field>
+            <field name="company_id" ref="oxord_repair.company_la_hacienda"/>
+        </record>
+
+        <record id="seq_repair_la_hacienda_onsite" model="ir.sequence">
+            <field name="name">La Hacienda Repair Order Onsite</field>
+            <field name="code">repair.order.ST4.onsite</field>
+            <field name="prefix">ST4/JO/</field>
+            <field name="padding">5</field>
+            <field name="company_id" ref="oxord_repair.company_la_hacienda"/>
+        </record>
+
+        <!-- OXORD Robinsons Sequence -->
+        <record id="seq_repair_robinsons_carryin" model="ir.sequence">
+            <field name="name">Robinsons Repair Order Carry-In</field>
+            <field name="code">repair.order.ST3.carryin</field>
+            <field name="prefix">ST3/RO/</field>
+            <field name="padding">5</field>
+            <field name="company_id" ref="oxord_repair.company_robinsons"/>
+        </record>
+
+        <record id="seq_repair_robinsons_onsite" model="ir.sequence">
+            <field name="name">Robinsons Repair Order Onsite</field>
+            <field name="code">repair.order.ST3.onsite</field>
+            <field name="prefix">ST3/JO/</field>
+            <field name="padding">5</field>
+            <field name="company_id" ref="oxord_repair.company_robinsons"/>
+        </record>
+
+    </data>
+</odoo>
