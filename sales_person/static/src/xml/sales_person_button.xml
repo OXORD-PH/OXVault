@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<templates xml:space="preserve">
-    <t t-name="sales_person.SalesPersonButton" owl="1">
-        <button class="control-button btn btn-secondary btn-lg lh-lg text-truncate w-auto" t-on-click="onClick">
-
-            <i class="fa fa-user"/> Sales Person
-        </button>
-    </t>
-</templates>

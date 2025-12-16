@@ -1,39 +1,22 @@
 {
-    'name': "POS Sales Person6",
-    'summary': "Record sales person on POS order",
-    'description': "Record sales person on POS order",
-    'author': "OXORD DIS",
-    'category': 'Point of Sale',
-    'version': '19.0.1.0.0',
-    'license': 'LGPL-3',
-
-    'depends': [
-        'hr',
-        'point_of_sale',
-        'pos_hr',
-        'account',
-    ],
-
-    # Backend views (normal XML)
-    'data': [
-        'views/pos_config_view.xml',
-        'views/res_config_settings.xml',
-        'views/pos_order_view.xml',
-        'views/account_move_view.xml',
-    ],
-
-
-'assets': {
-    'point_of_sale._assets_pos': [
-        'sales_person/static/src/screens/sales_person_button.js',
-        'sales_person/static/src/overrides/control_buttons.js',
-        'sales_person/static/src/overrides/pos_store.js',
-        'sales_person/static/src/xml/sales_person_button.xml',
-    ],
-},
-
-
-    'application': True,
+    'name': 'Sales Person On POS Order Line',
+    'Version': '18.0.1.0.0',
+    'category': 'Extra Tools',
+    'summary': 'This module is used to set sales persons on pos order line',
+    'description': 'This module allows you to assign salespersons to order'
+                   'lines in the Point of Sale (POS)',
+    'author': 'Cybrosys Techno solutions',
+    'company': 'Cybrosys Techno Solutions',
+    'maintainer': 'Cybrosys Techno Solutions',
+    'website': "https://www.cybrosys.com",
+    'depends': ['point_of_sale'],
+	'assets': {
+        'point_of_sale.assets': [
+            'salesperson/static/src/js/salesperson_button.js',
+            'salesperson/static/src/js/salesperson_popup.js',
+            'salesperson/static/src/xml/salesperson_button.xml',
+            'salesperson/static/src/xml/salesperson_popup.xml',
+        ],
+    },
     'installable': True,
-    'auto_install': False,
 }
