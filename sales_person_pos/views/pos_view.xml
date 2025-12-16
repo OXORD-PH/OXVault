@@ -1,0 +1,14 @@
+<!-- views/pos_order_view.xml -->
+<odoo>
+    <record id="view_pos_order_form_inherit_salesperson" model="ir.ui.view">
+        <field name="name">pos.order.form.inherit.salesperson</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="selected_employee_id" options="{'no_create': True}" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+

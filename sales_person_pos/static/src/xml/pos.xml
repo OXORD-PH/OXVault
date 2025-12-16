@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+<!-- XML Template -->
+
+
+<t t-name="sales_person_pos.SelectEmployeeButton" owl="1">
+    <button
+        t-att-class="props.class"
+        class="btn btn-light d-flex align-items-center gap-2 h-100"
+        t-on-click="onClick"
+    >
+        <img
+            t-att-src="state.avatar"
+            alt="avatar"
+            class="avatar rounded-circle"
+            style="width: 32px; height: 32px;"
+        />
+        <span t-esc="state.label" class="d-none d-xl-inline-block text-truncate" />
+    </button>
+</t>
+
+    <t t-name="sales_person_pos.ControlButtons" t-inherit="point_of_sale.ControlButtons" t-inherit-mode="extension">
+    <xpath expr="//SelectPartnerButton" position="after">
+        <SelectEmployeeButton class="buttonClass"/>
+    </xpath>
+</t>
+</templates>

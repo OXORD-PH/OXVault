@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_invoice_document" inherit_id="account.report_invoice_document">
+    <xpath expr="//p[@name='payment_communication']" position="inside">
+        <t t-if="o.pos_employee_id">
+            <p>Salesperson:<strong> <t t-esc="o.pos_employee_id.name"/></strong> </p>
+        </t>
+    </xpath>
+</template>
+</odoo>
