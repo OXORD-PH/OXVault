@@ -3,7 +3,7 @@ from odoo import models, fields, api
 class PosOrder(models.Model):
     _inherit = 'pos.order'
 
-    pos_sales_person_id = fields.Many2one(
+    sales_person_id = fields.Many2one(
         "hr.employee",
         string="POS Sales Person"
     )
@@ -12,7 +12,7 @@ class PosOrder(models.Model):
     def _order_fields(self, ui_order):
         res = super()._order_fields(ui_order)
         if 'sales_person_id' in ui_order:
-            res['pos_sales_person_id'] = ui_order.get('sales_person_id')
+            res['sales_person_id'] = ui_order.get('sales_person_id')
         return res
 
     def action_pos_order_invoice(self):
@@ -23,7 +23,7 @@ class PosOrder(models.Model):
             invoice = self.env['account.move'].browse(res['res_id'])
             if invoice:
                 invoice.write({
-                    'pos_sales_person_id': self.pos_sales_person_id.id,
+                    'sales_person_id': self.sales_person_id.id,
                 })
 
         return res
