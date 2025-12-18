@@ -1,0 +1,51 @@
+<odoo>
+    <template id="report_technical_document">
+        <t t-call="web.basic_layout">
+            <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <h2 style="text-align:center;">Technical Report</h2>
+
+                    <table style="width:100%; margin-bottom:10px;">
+                        <tbody>
+                            <tr>
+                                <td>Date: <t t-esc="o.received_date or '-'"/></td>
+                                <td style="text-align:right;">WO: <t t-esc="o.name or '-'"/></td>
+                            </tr>
+                            <tr>
+                                <td>Customer: <t t-esc="o.partner_id.name or '-'"/></td>
+                                <td style="text-align:right;">Technician: <t t-esc="o.technician_id.name or '-'"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table border="1" width="100%" cellpadding="5" cellspacing="0">
+                        <tbody>
+                            <tr>
+                                <th style="width:50%;">Unit Condition</th>
+                                <th style="width:50%;">Tests Performed</th>
+                            </tr>
+                            <tr>
+                                <td><t t-esc="o.unit_condition or '-'"/></td>
+                                <td><t t-esc="o.tests_performed or '-'"/></td>
+                            </tr>
+                            <tr>
+                                <th>Findings</th>
+                                <th>Recommendations</th>
+                            </tr>
+                            <tr>
+                                <td><t t-esc="o.findings or '-'"/></td>
+                                <td><t t-esc="o.recommendations or '-'"/></td>
+                            </tr>
+                            <tr>
+                                <th colspan="2">Remarks</th>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><t t-esc="o.remarks or '-'"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>
