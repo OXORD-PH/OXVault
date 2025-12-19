@@ -1,0 +1,8 @@
+<odoo>
+    <!-- Inject custom SCSS into Sign frontend -->
+    <template id="assets_frontend" inherit_id="sign.assets_frontend" name="Sign Override Assets">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" type="text/scss" href="/oxord_sign_override/static/src/scss/sign_override.scss"/>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,17 @@
+/* Override Sign module styles */
+
+/* Hide the signature frame */
+.o_sign_frame {
+    display: none !important;
+}
+
+/* Hide footer if needed */
+.o_sign_footer {
+    display: none !important;
+}
+
+/* Example: adjust dialog styling */
+.o_sign_name_and_signature_dialog {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+}
