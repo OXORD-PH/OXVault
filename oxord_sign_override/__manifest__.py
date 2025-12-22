@@ -1,5 +1,5 @@
 {
-    "name": "OXORD Sign Override5",
+    "name": "OXORD Sign Override3",
     "version": "1.0",
     "summary": "Hide sign frame styling in Odoo 19",
     "author": "OXORD Computer Solutions & Repair Center",
