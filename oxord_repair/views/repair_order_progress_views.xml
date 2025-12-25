@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+    <!-- ========================= -->
+    <!-- PROGRESS TREE / LIST VIEW -->
+    <!-- ========================= -->
+    <record id="view_repair_order_progress_tree" model="ir.ui.view">
+      <field name="name">repair.order.progress.list</field>
+      <field name="model">repair.order</field>
+      <field name="arch" type="xml">
+        <list string="Repair Progress">
+          <field name="name"/> <!-- Work Order / Repair Reference -->
+          <field name="partner_id"/> <!-- Customer -->
+          <field name="endorse_to_tech"/> <!-- Technician -->
+          <field name="coordinator_id"/> <!-- Coordinator -->
+          <field name="state"/>
+          <field name="received_date"/>
+          <field name="repair_start_date"/>
+          <field name="repair_end_date"/>
+          <field name="released_date"/>
+          <field name="total_aging_formatted"/>
+        </list>
+      </field>
+    </record>
+
+
+    <!-- ========================= -->
+    <!-- ACTION -->
+    <!-- ========================= -->
+    <record id="action_repair_order_progress" model="ir.actions.act_window">
+      <field name="name">Repair Progress</field>
+      <field name="res_model">repair.order</field>
+      <field name="view_mode">list,pivot,graph</field>
+      <field name="view_id" ref="view_repair_order_progress_tree"/>
+      <field name="target">current</field>
+    </record>
+
+    <!-- ========================= -->
+    <!-- MENU ITEM -->
+    <!-- ========================= -->
+    <menuitem id="menu_repair_progress"
+              name="Repair Progress"
+              parent="repair.menu_repair_order"
+              sequence="96"
+              action="action_repair_order_progress"
+              groups="base.group_system"/>
+  </data>
+</odoo>
