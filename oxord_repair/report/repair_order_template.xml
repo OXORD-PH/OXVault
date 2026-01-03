@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_repair_order_document">
+        <t t-name="report_repair_order_document">
+            <main>
+
+                <div style="height:5mm;"></div>
+
+                <t t-foreach="docs" t-as="o">
+
+                    <!-- FULL PAGE BACKGROUND -->
+                    <img
+                        t-att-src="'/oxord_repair/static/src/img/background.jpg'"
+                        style="position:fixed;
+                               top:0;
+                               left:0;
+                               width:100%;
+                               height:100%;
+                               z-index:-1;
+                               object-fit:cover;"
+                    />
+
+                    <style>
+                        @page {
+                            size: A4;
+                            margin: 8mm 8mm 8mm 8mm;
+                        }
+                        main {
+                            page-break-after: avoid !important;
+                            page-break-before: avoid !important;
+                        }
+                        .oxord-body-wrapper {
+                            width: 100%;
+                            margin: 0 auto;
+                            padding: 2mm 6mm;
+                            box-sizing: border-box;
+                        }
+                        .oxord-section {
+                            background-color: #e0f2f1;
+                            color: #004d40;
+                            padding: 2px 3px;
+                            font-weight: bold;
+                            margin-top: 1mm;
+                            border-left: 2px solid #00796b;
+                            border-radius: 3px;
+                            font-size: 12px;
+                        }
+                        .tech-box {
+                            border: 1px solid #00796b;
+                            border-radius: 5px;
+                            padding: 4px 6px;
+                            margin-bottom: 2mm;
+                            background-color: #f0f5f5;
+                            box-shadow: 1px 1px 2px rgba(0,0,0,0.03);
+                            font-size: 12px;
+                        }
+                        .tech-box table {
+                            width: 100%;
+                            border-collapse: collapse;
+                        }
+                        .tech-box td,
+                        .tech-box th {
+                            padding: 2px 3px;
+                            font-size: 12px;
+                            word-wrap: break-word;
+                            white-space: pre-wrap;
+                        }
+                        .oxord-footer {
+                            font-size: 9px;
+                            color: #555;
+                            margin-top: 6px;
+                            text-align: center;
+                        }
+                    </style>
+
+                    <!-- HEADER -->
+                    <div class="oxord-header">
+                        <table style="width:100%; border-bottom:2px solid #009688; margin-bottom:1mm;">
+                            <tr>
+                                <td style="width:22%; padding-left:6mm;">
+                                    <img
+                                        t-if="o.company_id.logo"
+                                        t-att-src="'data:image/png;base64,%s' % (o.company_id.logo.decode() if o.company_id.logo else '')"
+                                        style="height:50px;"
+                                        alt="Company Logo"
+                                    />
+                                </td>
+                                <td style="color:#004d40;">
+                                    <div style="font-weight:bold; font-size:15px;">
+                                        OXORD COMPUTER SOLUTIONS &amp; REPAIR CENTER
+                                    </div>
+                                    <div style="font-size:11px;">
+                                        2F Robinsons Place Roxas, Pueblo de Panay Lawa-an, Roxas City
+                                    </div>
+                                    <div style="font-size:11px;">
+                                        Tel: (036) 621-XXXX | www.oxord.com.ph | FB: @OxordPH
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- BODY -->
+                    <div class="oxord-body-wrapper">
+
+                        <div style="font-weight:bold; color:#004d40; font-size:15px; margin-top:2.5mm;">
+                            CLAIM FORM NO: <t t-esc="o.name"/>
+                        </div>
+
+                        <!-- CUSTOMER INFO -->
+                        <div class="oxord-section">Customer Information</div>
+                        <div class="tech-box">
+                            <table>
+                                <tr><td>Customer:</td><td><t t-esc="o.partner_id.name or '-'"/></td></tr>
+                                <tr>
+                                    <td>Address:</td>
+                                    <td>
+                                        <t t-esc="o.partner_street or ''"/>
+                                        <t t-esc="o.partner_city or ''"/>
+                                        <t t-esc="o.partner_zip or ''"/>
+                                    </td>
+                                </tr>
+                                <tr><td>Telephone:</td><td><t t-esc="o.partner_id.phone or '-'"/></td></tr>
+                                <tr><td>Email:</td><td><t t-esc="o.partner_id.email or '-'"/></td></tr>
+                                <tr><td>Facebook:</td><td><t t-esc="o.partner_id.facebook or '-'"/></td></tr>
+                            </table>
+                        </div>
+
+                        <!-- UNIT INFO -->
+                        <div class="oxord-section">Unit Information</div>
+                        <div class="tech-box">
+                            <table>
+                                <tr><td>Department:</td><td><t t-esc="o.department_id.name or '-'"/></td></tr>
+                                <tr><td>Unit Type:</td><td><t t-esc="o.unit_type_id.name or '-'"/></td></tr>
+                                <tr><td>Brand:</td><td><t t-esc="o.brand_id.name or '-'"/></td></tr>
+                                <tr><td>Model:</td><td><t t-esc="o.model_id.name or '-'"/></td></tr>
+                                <tr><td>Serial No.:</td><td><t t-esc="o.serial or '-'"/></td></tr>
+                                <tr>
+                                    <td>Accessories:</td>
+                                    <td><t t-esc="' , '.join([a.name for a in o.accessory_ids])"/></td>
+                                </tr>
+                                <tr><td>Password:</td><td><t t-esc="o.password or '-'"/></td></tr>
+                                <tr>
+                                    <td>Problem:</td>
+                                    <td><t t-esc="' , '.join([p.name for p in o.problem_ids])"/></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!-- RECEIVING DETAILS -->
+                        <div class="oxord-section">Receiving Details</div>
+                        <div class="tech-box">
+                            <table>
+                                <tr><td>Received Date:</td><td><t t-esc="o._format_datetime(o.received_date)"/></td></tr>
+                                <tr><td>Received By:</td><td><t t-esc="o.received_by.name or '-'"/></td></tr>
+                                <tr><td>Remarks:</td><td><t t-esc="o.remarks or '-'"/></td></tr>
+                                <tr><td>Service Type:</td><td><t t-esc="dict(o._fields['service_type'].selection).get(o.service_type)"/></td></tr>
+                                <tr><td>Branch:</td><td><t t-esc="dict(o._fields['branch'].selection).get(o.branch)"/></td></tr>
+                                <tr><td>POP Date:</td><td><t t-esc="o.pop_date or '-'"/></td></tr>
+                                <tr><td>Warranty Expiry Date:</td><td><t t-esc="o.warranty_expiry_date or '-'"/></td></tr>
+                                <tr><td>Warranty Status:</td><td><t t-esc="dict(o._fields['warranty_status'].selection).get(o.warranty_status) or '-'"/></td></tr>
+                            </table>
+                        </div>
+
+                        <!-- SERVICE DETAILS -->
+                        <div class="oxord-section">Service Details</div>
+                        <div class="tech-box">
+                            <table>
+                                <tr><td>Technician:</td><td><t t-esc="o.endorse_to_tech.name or '-'"/></td></tr>
+                                <tr><td>Action Taken:</td><td><t t-esc="o.action_taken or '-'"/></td></tr>
+                                <tr><td>Technician Remarks:</td><td><t t-esc="o.technician_remarks or '-'"/></td></tr>
+                                <tr><td>Labor Amount:</td><td><t t-esc="o.labor_amount or 0.0"/> PHP</td></tr>
+                            </table>
+                        </div>
+
+                        <!-- TERMS & CONDITIONS -->
+                        <div class="oxord-section">Terms &amp; Conditions</div>
+                        <div class="tech-box" style="font-size:11px; line-height:1.2em;">
+                            <ol>
+                                <li>I am the owner, and I permitted OXORD Computer Solutions &amp; Repair Center to perform the necessary repair and replace the needed parts (if necessary).</li>
+                                <li>The unit was checked in my presence and the details and remarks stated above are true.</li>
+                                <li>A CLAIM FORM should be presented upon claiming the unit. I understand that if no claim form is presented, my unit will not be released.</li>
+                                <li>If the warranty is void or expired, I will pay for labor and/or parts.</li>
+                                <li>I shall pay the check-up fee for my out-of-warranty unit in the amount of three hundred fifty pesos (Php350).</li>
+                                <li>I understand that I have been given 7 days to claim the unit after I receive notification from OXORD to claim the unit, and if the unit is unclaimed after 7 days, I will be charged a storage fee of 50 pesos per day if not claimed within 30 days.</li>
+                                <li>I understand that after 30 days, my unclaimed unit will be forfeited to cover the cost of storage and I authorize OXORD Computer Solutions &amp; Repair Center to dispose of my unit if I fail to pick-up or pull-out.</li>
+                                <li>In such a manner that I cannot claim my unit, I will send my authorized representative with an authorization letter and proof of identification to claim my unit.</li>
+                                <li>I shall hold OXORD Computer Solutions &amp; Repair Center free from liability and no responsibility in the event of loss or damage caused by a natural disaster such as a fire, flood, typhoon, or force majeure.</li>
+                                <li>I understand that I am responsible for saving or backing up any data on my unit's storage device(s) before sending it to OXORD for service. OXORD will not be responsible for any damage or loss due to the loss or corruption of data in my unit. Once OXORD receives the unit, I understand that it is ready for format (if needed).</li>
+                            </ol>
+                            <div style="margin-top:4mm; text-align:right;">
+                                I hereby agree to the above terms and conditions,<br/><br/>
+                                ______________________________<br/>
+                                Printed Name and Signature<br/>
+                                Date:________________________
+                            </div>
+                        </div>
+
+                        <!-- ACKNOWLEDGEMENT UPON RELEASE -->
+                        <div class="oxord-section">Acknowledgement Upon Release</div>
+                        <div class="tech-box">
+                            <div style="margin-bottom:2mm;">Received above unit in good condition</div>
+                            <table style="width:100%; border-collapse:collapse;">
+                                <tr>
+                                    <!-- Customer -->
+                                    <td style="width:48%; vertical-align: top; text-align:center;">
+                                        <strong>Customer:</strong><br/>
+                                        ______________________________<br/>
+                                        Printed Name and Signature<br/>
+                                        Date: ________________________
+                                    </td>
+                                    <!-- Released By -->
+                                    <td style="width:48%; vertical-align: top; text-align:center;">
+                                        <strong>Released By:</strong><br/>
+                                        ______________________________<br/>
+                                        Printed Name and Signature<br/>
+                                        Date: ________________________
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+
+
+
+                        <!-- FOOTER -->
+                        <div class="oxord-footer">
+                            This document is system-generated by OXORD Diginital Infrastracture Ser.
+                        </div>
+
+                    </div>
+
+                </t>
+            </main>
+        </t>
+    </template>
+
+</odoo>
