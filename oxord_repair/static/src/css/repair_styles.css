@@ -1,0 +1,34 @@
+/* Light Mode (default) */
+.oxord-card {
+    background: #ffffff; /* white container */
+    border-radius: 8px; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); 
+    padding: 16px; 
+    margin-bottom: 20px; 
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease, color 0.3s ease;
+
+    /* Control width */
+    max-width: 1150px; 
+    margin-left: auto;
+    margin-right: auto;
+    color: #000000; /* default text color */
+}
+
+.oxord-card:hover {
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 16px rgba(1, 64, 75, 0.25);
+}
+
+/* Dark Mode (automatic based on system preference) */
+@media (prefers-color-scheme: dark) {
+    .oxord-card {
+        background: #1b1d26;               /* dark container */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6); 
+        color: #e0e0e0;                    /* light text */
+    }
+
+    .oxord-card:hover {
+        box-shadow: 0 6px 16px rgba(255, 255, 255, 0.1);
+    }
+}
+

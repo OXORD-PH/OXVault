@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="group_repair_coordinator" model="res.groups">
+            <field name="name">Repair Coordinator</field>
+        </record>
+        
+        <record id="group_technical_head" model="res.groups">
+            <field name="name">Technical Head</field>
+        </record>
+
+
+    </data>
+</odoo>

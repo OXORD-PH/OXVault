@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- Main Services Menu: only Admin -->
+        <menuitem id="menu_repair_services"
+                  name="Services"
+                  parent="repair.menu_repair_order"
+                  sequence="5"
+                  groups="base.group_system"/>
+
+        <!-- Repair Problems under Services -->
+        <menuitem id="menu_repair_problem"
+                  name="Repair Services / Price Lists"
+                  parent="menu_repair_services"
+                  action="action_repair_problem"
+                  sequence="3"
+                  groups="base.group_system"/>
+
+        <!-- Brands under Services -->
+        <menuitem id="menu_product_brand"
+                  name="Brands"
+                  parent="menu_repair_services"
+                  action="action_product_brand"
+                  sequence="1"
+                  groups="base.group_system"/>
+
+        <!-- Unit Types under Services -->
+        <menuitem id="menu_repair_unit_type"
+                  name="Unit Types"
+                  parent="menu_repair_services"
+                  action="action_repair_unit_type"
+                  sequence="2"
+                  groups="base.group_system"/>
+
+        <!-- Technical Reports under Services -->
+        <menuitem id="menu_technical_reports"
+                  name="Technical Reports"
+                  parent="menu_repair_services"
+                  action="action_technical_report"
+                  sequence="4"
+                  groups="base.group_system"/>
+
+    </data>
+</odoo>
