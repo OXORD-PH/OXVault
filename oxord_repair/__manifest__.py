@@ -8,17 +8,22 @@
     'depends': ['base', 'repair', 'hr', 'sale', 'stock'],
     'data': [
         'security/groups.xml',
-        # 'security/menus.xml',
         'security/ir.model.access.csv',
         'report/repair_order_template.xml',
         'report/repair_order_report.xml',
         'report/technical_report_template.xml', 
-        # 'data/repair_sequence_data.xml',
+        'data/repair_sequence.xml',
+        'data/job_order_sequence.xml',
+        'data/repair_problem_data.xml',
         'data/technical_report_sequence.xml',
         'views/repair_endorse_wizard_view.xml',
         'views/endorse_coordinator_wizard.xml',
         'views/technical_report_views.xml',
         'views/repair_order_view.xml',
+        'views/job_order_views.xml',
+        'views/job_order_menus.xml',
+        'report/job_order_template.xml',
+        'report/report_job_order.xml',
         'views/product_accessory_view.xml',
         'views/product_brand_views.xml',
         'views/repair_problem_views.xml',
@@ -32,7 +37,7 @@
     ],
     'assets': {
         'web.assets_backend': [
-            'oxord_repair/static/src/css/repair_styles.css',
+            'oxord_repair/static/src/css/repair_styles.css'
         ],
     },
     'installable': True,

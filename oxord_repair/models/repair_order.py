@@ -1,11 +1,17 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError, UserError
 from datetime import datetime, timedelta
+from dateutil.relativedelta import relativedelta
+
 
 class RepairOrder(models.Model):
     _inherit = 'repair.order'
 
-
+    order_type = fields.Selection([
+        ('repair', 'Repair Order'),
+        ('job', 'Job Order'),
+    ], string='Order Type', required=True, default='repair')
+    
     state_for_statusbar = fields.Selection(
         selection=[
             ('draft', 'Draft'),
@@ -63,12 +69,12 @@ class RepairOrder(models.Model):
     branch = fields.Selection(
         [
             ('la_hacienda', 'La Hacienda'),
-            ('robinsons', 'Robinsons')
+            ('robinsons', 'Robinsons'),
+            ('hq', 'Headquarters'),
         ],
         string='Branch',
         default='la_hacienda',
-        required=False,
-        help="Select the branch for this repair order"
+        required=True,
     )
 
     # ------------------------
@@ -190,7 +196,7 @@ class RepairOrder(models.Model):
     
     problem_ids = fields.Many2many(
     'repair.problem',
-    string="Problems",
+    string="Repair Service",
     domain="[('department_id', '=', department_id)]",
     help="Select one or more problems related to this department"
     )
@@ -235,10 +241,12 @@ class RepairOrder(models.Model):
         required=True
     )
     action_taken = fields.Text(string="Action Taken")
-    labor_amount = fields.Float(string="Labor Amount")
     technician_remarks = fields.Text(string="Technician Remarks")
 
-
+    problem_detail = fields.Text(
+        string="Problem Details",
+        help="Additional description provided by the customer or technician."
+    )
 
 
 
@@ -383,7 +391,6 @@ class RepairOrder(models.Model):
     )
 
 
-    invoice_ids = fields.One2many('account.move', 'repair_order_id', string="Invoices")  # optional
 
     is_rerepair = fields.Boolean(string="Is Re-Repair", default=False)
     original_repair_id = fields.Many2one(
@@ -420,36 +427,225 @@ class RepairOrder(models.Model):
         string='Technical Reports'
     )
 
-    payment_state = fields.Selection(
-        selection=[
-            ('not_paid', 'Not Paid'),
-            ('partial', 'Partial'),
-            ('paid', 'Paid')
-        ],
-        string='Payment Status',
-        compute='_compute_payment_state',
+    
+
+    can_release = fields.Boolean(
+        string="Can Release",
+        compute="_compute_can_release"
+    )
+
+    sale_order_id = fields.Many2one('sale.order', string='Sale Order')
+
+    repair_line_ids = fields.One2many(
+        'repair.line',        # related model
+        'repair_order_id',    # field on repair.line
+        string='Parts'
+    )
+
+    pop_date = fields.Date(string="POP Date")  # Point of Purchase / Warranty Start
+    warranty_status = fields.Selection(
+        [('in_warranty', 'In Warranty'), ('out_warranty', 'Out of Warranty')],
+        string="Warranty Status",
+        compute="_compute_warranty_status",
         store=True
     )
+    warranty_expiry_date = fields.Date(
+        string="Warranty Expiry Date",
+        compute="_compute_warranty_status",
+        store=True
+    )
+    void_warranty = fields.Boolean(
+        string="Void Warranty",
+        help="Check this box if the warranty is void due to customer-induced damage (CID) or other reasons."
+    )
     
-    @api.depends('payment_state', 'state')
-    def _compute_auto_release(self):
+    warranty_css_class = fields.Char(
+        compute="_compute_warranty_css_class",
+        store=False
+    )
+
+    warranty_duration = fields.Selection(
+        [
+            ('6m', '6 Months'),
+            ('12m', '1 Year'),
+            ('24m', '2 Years'),
+            ('36m', '3 Years'),
+        ],
+        string="Warranty Duration",
+        default='12m'
+    )
+
+    # Field must be stored if you want invisible="field_name" to work reliably
+    is_onsite = fields.Boolean(
+        string="Is Onsite",
+        store=True,
+        readonly=True,
+    )
+    
+    @api.onchange('service_type')
+    def _onchange_service_type_visibility(self):
+        """Set is_onsite True if service_type is 'onsite'"""
         for rec in self:
-            # Only trigger if repair is done and fully paid
-            if rec.state == 'done' and rec.payment_state == 'paid':
-                rec.state = 'released'
-                rec.released_date = rec.released_date or fields.Datetime.now()
+            rec.is_onsite = rec.service_type == 'onsite'
+
+    @api.depends('state')
+    def _compute_readonly_fields(self):
+        for rec in self:
+            rec.pop_date_editable = rec.state == 'draft'
+            rec.warranty_duration_editable = rec.state == 'draft'
+            rec.void_warranty_editable = rec.state == 'draft'
+
+    @api.depends('void_warranty')
+    def _compute_warranty_css_class(self):
+        for rec in self:
+            rec.warranty_css_class = 'o_warranty_voided' if rec.void_warranty else ''
+    
+    @api.depends('pop_date', 'void_warranty', 'warranty_duration')
+    def _compute_warranty_status(self):
+        today = fields.Date.today()
+        
+        # Map the selection values to months
+        duration_months = {
+            '6m': 6,
+            '12m': 12,
+            '24m': 24,
+            '36m': 36,
+        }
+    
+        for rec in self:
+            if rec.pop_date:
+                # Get months from selection, default to 12 if not set
+                months = duration_months.get(rec.warranty_duration, 12)
                 
-    @api.depends('invoice_ids.payment_state')
-    def _compute_payment_state(self):
-        for rec in self:
-            if not rec.invoice_ids:
-                rec.payment_state = 'not_paid'
-            elif all(inv.payment_state == 'paid' for inv in rec.invoice_ids):
-                rec.payment_state = 'paid'
-            elif any(inv.payment_state in ('in_payment', 'partial') for inv in rec.invoice_ids):
-                rec.payment_state = 'partial'
+                # Compute expiry date
+                expiry_date = rec.pop_date + relativedelta(months=months)
+                rec.warranty_expiry_date = expiry_date
+    
+                # Compute status
+                if rec.void_warranty:
+                    rec.warranty_status = 'out_warranty'
+                else:
+                    rec.warranty_status = 'in_warranty' if today <= expiry_date else 'out_warranty'
             else:
-                rec.payment_state = 'not_paid'
+                rec.warranty_status = False
+                rec.warranty_expiry_date = False
+
+        
+    @api.depends('coordinator_id')
+    def _compute_show_releasing(self):
+        for rec in self:
+            rec.show_releasing = bool(rec.coordinator_id)
+    
+
+    
+    def action_create_payment_sale_order(self):
+        self.ensure_one()
+    
+        if self.sale_order_id:
+            # Already created, open it
+            return {
+                'type': 'ir.actions.act_window',
+                'res_model': 'sale.order',
+                'view_mode': 'form',
+                'res_id': self.sale_order_id.id,
+                'target': 'current',
+            }
+    
+        if not self.partner_id:
+            raise UserError(_("Please set a Customer for this Repair Order."))
+    
+        sale_order_obj = self.env['sale.order']
+        order_lines = []
+    
+        # ============================
+        # 1️⃣ Add SERVICE section
+        # ============================
+        if self.problem_ids:
+            order_lines.append((0, 0, {
+                'display_type': 'line_section',
+                'name': '==== SERVICE ====',
+            }))
+            for problem in self.problem_ids:
+                if not problem.product_id:
+                    raise UserError(_("Problem '%s' has no product set." % problem.name))
+                price = float(problem.estimated_cost or 0.0)
+                order_lines.append((0, 0, {
+                    'product_id': problem.product_id.id,
+                    'product_uom_qty': 1.0,
+                    'price_unit': price,
+                    'name': problem.name,
+                }))
+    
+        # ============================
+        # 2️⃣ Add PARTS section
+        # ============================
+        if self.repair_line_ids:
+            order_lines.append((0, 0, {
+                'display_type': 'line_section',
+                'name': '==== PARTS ====',
+            }))
+            for part in self.repair_line_ids:
+                if not part.product_id:
+                    raise UserError(_("A part has no product set."))
+                price = float(part.price_unit or 0.0)
+                quantity = float(part.product_uom_qty or 1.0)
+                order_lines.append((0, 0, {
+                    'product_id': part.product_id.id,
+                    'product_uom_qty': quantity,
+                    'price_unit': price,
+                    'name': part.name or part.product_id.name,
+                }))
+    
+        # ============================
+        # 3️⃣ Add LABOR section
+        # ============================
+        labor_product = self.env['product.product'].search([('name', '=', 'Technician Labor')], limit=1)
+        if not labor_product:
+            # Create placeholder labor product if it doesn't exist
+            labor_product = self.env['product.product'].create({
+                'name': 'Technician Labor',
+                'type': 'service',
+                'sale_ok': True,
+                'purchase_ok': False,
+            })
+    
+        order_lines.append((0, 0, {
+            'display_type': 'line_section',
+            'name': '==== LABOR ====',
+        }))
+    
+        order_lines.append((0, 0, {
+            'product_id': labor_product.id,
+            'product_uom_qty': 1.0,
+            'price_unit': 350.0,
+            'name': 'Technician Labor',
+        }))
+    
+        if not order_lines:
+            raise UserError(_("No lines available to create a Sales Order."))
+    
+        # ============================
+        # 4️⃣ Create the Sales Order
+        # ============================
+        sale_order = sale_order_obj.create({
+            'partner_id': self.partner_id.id,
+            'order_line': order_lines,
+            'origin': self.name,
+        })
+    
+        # 5️⃣ Link it to Repair Order
+        self.sale_order_id = sale_order.id
+    
+        # Instead of returning the sale order view, just refresh the repair order form
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'reload',
+        }
+
+
+
+
+    
 
     def action_create_technical_report(self):
         self.ensure_one()
@@ -463,28 +659,12 @@ class RepairOrder(models.Model):
             }
         }
 
-    
-    @api.depends('invoice_ids')
-    def _compute_invoice_count(self):
-        for rec in self:
-            rec.invoice_count = len(rec.invoice_ids)
 
     @api.depends('move_ids')
     def _compute_move_count(self):
         for rec in self:
             rec.move_count = len(rec.move_ids)
 
-    # Action for smart button to view invoices
-    def action_view_invoices(self):
-        self.ensure_one()
-        return {
-            'name': 'Invoices',
-            'type': 'ir.actions.act_window',
-            'res_model': 'account.move',
-            'view_mode': 'tree,form',
-            'domain': [('id', 'in', self.invoice_ids.ids)],
-            'context': {'default_repair_id': self.id},
-        }
 
     # Action for smart button to view stock moves
     def action_view_moves(self):
@@ -557,99 +737,6 @@ class RepairOrder(models.Model):
         }
 
     
-    def action_create_payment_invoice(self):
-        self.ensure_one()
-    
-        if self.invoice_ids:
-            raise UserError("Invoice already exists for this repair order.")
-    
-        # Create invoice
-        invoice = self.env['account.move'].create({
-            'move_type': 'out_invoice',
-            'partner_id': self.partner_id.id,
-            'invoice_date': fields.Date.today(),
-            'repair_order_id': self.id,
-        })
-    
-        # Add PROBLEMS HEADER
-        self.env['account.move.line'].create({
-            'move_id': invoice.id,
-            'product_id': False,
-            'quantity': 0,
-            'price_unit': 0,
-            'name': "=== PROBLEMS ===",
-            'display_type': 'line_section',
-        })
-    
-        # Add Problem Lines
-        for problem in self.problem_ids:
-            self.env['account.move.line'].create({
-                'move_id': invoice.id,
-                'product_id': False,
-                'quantity': 1,
-                'price_unit': problem.estimated_cost or 0.0,
-                'name': problem.name,
-            })
-
-        # === PARTS (from standard repair order moves) ===
-        if self.move_ids:
-            self.env['account.move.line'].create({
-                'move_id': invoice.id,
-                'display_type': 'line_section',
-                'name': '=== PARTS ===',
-            })
-        
-            for move in self.move_ids:
-                if not move.product_id or move.product_uom_qty <= 0:
-                    continue
-        
-                product = move.product_id
-                account = (
-                    product.property_account_income_id
-                    or product.categ_id.property_account_income_categ_id
-                )
-                if not account:
-                    raise UserError(
-                        f"No income account defined for product {product.display_name}"
-                    )
-        
-                self.env['account.move.line'].create({
-                    'move_id': invoice.id,
-                    'product_id': product.id,
-                    'name': product.display_name,
-                    'quantity': move.product_uom_qty,
-                    'price_unit': product.lst_price,
-                    'account_id': account.id,
-                    'tax_ids': [(6, 0, product.taxes_id.ids)],
-                })
-
-
-    
-        # Add Labor Line if exists
-        if self.labor_amount and self.labor_amount > 0:
-            self.env['account.move.line'].create({
-                'move_id': invoice.id,
-                'product_id': False,
-                'quantity': 0,
-                'price_unit': 0,
-                'name': "=== OTHER ===",
-                'display_type': 'line_section',
-            })
-    
-            self.env['account.move.line'].create({
-                'move_id': invoice.id,
-                'product_id': False,
-                'quantity': 1,
-                'price_unit': self.labor_amount,
-                'name': "Labor Charge",
-            })
-    
-        # Refresh page so button disappears
-        return {
-            'type': 'ir.actions.client',
-            'tag': 'reload',
-        }
-
 
 
     def action_print_claim_form(self):
@@ -697,13 +784,6 @@ class RepairOrder(models.Model):
         self.endorse_to_tech = new_tech.id
 
 
-
-
-
-
-
-
-
     def action_endorse_to_tech(self):
         return {
             'name': 'Endorse Technician',
@@ -714,12 +794,6 @@ class RepairOrder(models.Model):
             'context': {'default_repair_id': self.id},
         }
 
-
-
-    @api.depends('coordinator_id')
-    def _compute_show_releasing(self):
-        for rec in self:
-            rec.show_releasing = bool(rec.coordinator_id)
 
 
     # --- Button to open the wizard
@@ -791,20 +865,6 @@ class RepairOrder(models.Model):
         for rec in self:
             # Once repair starts or beyond, make fields read-only
             rec.readonly_customer_info = rec.state in ('under_repair', 'done', 'released')
-
-    @api.depends('pop_date')
-    def _compute_warranty_status(self):
-        """Automatically determine warranty status based on POP Date."""
-        today = fields.Date.today()
-        for rec in self:
-            if rec.pop_date:
-                expiry_date = rec.pop_date + timedelta(days=365)  # 1-year warranty
-                rec.warranty_expiry_date = expiry_date
-                rec.warranty_status = 'in_warranty' if today <= expiry_date else 'out_warranty'
-            else:
-                rec.warranty_status = False
-                rec.warranty_expiry_date = False
-
 
     @api.depends('customer_category')
     def _compute_show_fields(self):
@@ -982,7 +1042,7 @@ class RepairOrder(models.Model):
             rec.message_post(body=f"Repair marked as <b>Done</b> by {self.env.user.name}.")
     
             # Create invoice in draft automatically (manual payment)
-            rec.action_create_invoice()
+            rec.action_create_payment_invoice()
 
 
 
@@ -998,32 +1058,28 @@ class RepairOrder(models.Model):
         """Stamp the parts received datetime (call when parts arrive)."""
         for rec in self:
             rec.parts_received_date = fields.Datetime.now()
-    
+        
     def action_release(self):
-        """Mark as released (final stage) and stamp released_date."""
         for rec in self:
-            # Only completed orders can be released
             if rec.state != 'done':
                 raise UserError("Only completed repair orders can be released.")
-    
-            # Check if already released
+
             if rec.released_date:
                 raise UserError("This repair order is already released.")
-    
-            # Check invoices
-            if not rec.invoice_ids:
-                raise UserError("Cannot release this repair order: no invoice exists.")
-    
-            # Filter invoices: must be posted AND paid
-            unpaid_invoices = rec.invoice_ids.filtered(lambda inv: inv.state != 'posted' or inv.payment_state != 'paid')
-            if unpaid_invoices:
+
+            # Warn if no sale order created
+            if not rec.sale_order_id:
                 raise UserError(
-                    "Cannot release this repair order because the related invoice(s) are not posted or not fully paid."
+                    "Cannot release this repair order.\n\n"
+                    "No sales order has been created. Please create a sales order first."
                 )
-    
-            # Release the order
-            rec.released_date = fields.Datetime.now()
-            rec.state = 'released'
+
+            # RELEASE
+            rec.write({
+                'state': 'released',
+                'released_date': fields.Datetime.now(),
+            })
+
 
 
     def action_cancel(self):
@@ -1197,7 +1253,12 @@ class RepairOrder(models.Model):
             record.individual_type = individual_tag[:1] or False
             record.company_category = False
             record.contact_person_id = False
-
+            
+    def action_custom_save(self, *args, **kwargs):
+        """Button to save the record safely."""
+        # This triggers the ORM to save any changes made in the form
+        self.write({})
+        return True
 
     @api.depends('partner_id')
     def _compute_partner_info(self):
@@ -1341,101 +1402,95 @@ class RepairOrder(models.Model):
             parts.append(f"{minutes}min")
         if seconds:
             parts.append(f"{seconds}s")
-        return ', '.join(parts) if parts else '0s'
+        return ', '.join(parts) if parts else ''    
         
     @api.model_create_multi
     def create(self, vals_list):
+        sequence_map = {
+            ('la_hacienda', 'carry_in'): 'repair.st4.wo',
+            ('robinsons', 'carry_in'): 'repair.st3.wo',
+        }
+    
         for vals in vals_list:
-            # Determine company
-            if 'company_id' in vals:
-                company = self.env['res.company'].browse(vals['company_id'])
-            else:
-                company = self.env.company
+            if vals.get('name', _('New')) == _('New'):
+                branch = vals.get('branch')
+                service_type = vals.get('service_type', 'carry_in')
     
-            # Default service type
-            service_type = vals.get('service_type', 'carry_in')
+                if not branch:
+                    raise ValidationError(_("Branch is required to generate Repair Order reference."))
     
-            # HQ always uses JO sequence
-            if company == self.env.ref('base.main_company'):
-                seq_code = 'repair.order.HQ'
-            else:
-                if service_type == 'carry_in':
-                    seq_code = f'repair.order.{company.code}.carryin'
-                else:
-                    seq_code = f'repair.order.{company.code}.onsite'
+                seq_code = sequence_map.get((branch, service_type))
+                if not seq_code:
+                    raise ValidationError(_("No sequence configured for this Branch + Service Type."))
     
-            # Assign sequence
-            vals['name'] = self.env['ir.sequence'].next_by_code(seq_code) or _('New')
+                vals['name'] = self.env['ir.sequence'].next_by_code(seq_code)
     
-            # ✅ Ensure unit_type_id exists (avoid NotNullViolation)
-            if 'unit_type_id' not in vals or not vals['unit_type_id']:
-                # Pick a default unit type if any exists
-                default_unit = self.env['repair.unit.type'].search([], limit=1)
-                if default_unit:
-                    vals['unit_type_id'] = default_unit.id
-                else:
-                    # Optional: raise a warning in dev if no unit types exist
-                    _logger.warning("No default repair.unit.type found. Repair Order created without unit_type_id.")
-    
-        return super(RepairOrder, self).create(vals_list)
-    
+        return super().create(vals_list)
+
         
 
 
 
+    @api.constrains('branch', 'service_type')
+    def _check_branch_service_lock(self):
+        for rec in self:
+            if rec._origin and rec._origin.id:
+                old = rec._origin
+                if old.branch != rec.branch or old.service_type != rec.service_type:
+                    raise ValidationError(
+                        _("You cannot change Branch or Service Type after the Repair Order is created.")
+                    )
 
      
 
     def write(self, vals):
-        """Track changes to Received By and Technician and log in chatter. 
-        Also record when a coordinator is first assigned.
-        """
+        """Track changes and handle void warranty restrictions."""
         for rec in self:
             changes = []
-
+    
+            # --- Existing logic ---
             # Track when coordinator is first assigned
             if 'coordinator_id' in vals and vals['coordinator_id']:
                 if not rec.coordinator_assigned_date:
                     rec.coordinator_assigned_date = fields.Datetime.now()
-
+    
             # Compare and log Received By changes
             if 'received_by' in vals:
                 old = rec.received_by.name or "None"
                 new = self.env['res.users'].browse(vals['received_by']).name if vals['received_by'] else "None"
                 if old != new:
                     changes.append(f"Coordinator changed from {old} to {new}.")
-
+    
             if 'endorse_to_tech' in vals:
                 new_tech = self.env['res.users'].browse(vals['endorse_to_tech'])
-
-                # If technician is changing WHILE under repair
                 if rec.endorse_to_tech and rec.endorse_to_tech != new_tech and rec.state == 'under_repair':
-
                     # END previous technician aging
                     if rec.current_tech_start and not rec.current_tech_end:
                         rec.current_tech_end = fields.Datetime.now()
-
                     # Move current → previous
                     rec.previous_technician_id = rec.endorse_to_tech
                     rec.previous_tech_start = rec.previous_tech_start or rec.repair_start_date
-                    rec.previous_tech_end = rec.current_tech_end  # stamping same end time
-
+                    rec.previous_tech_end = rec.current_tech_end
                     # Start new technician aging
                     rec.current_tech_start = fields.Datetime.now()
-                    rec.current_tech_end = False  # running
-
-
-
-
-
+                    rec.current_tech_end = False
+    
+            # --- VOID WARRANTY RESTRICTION ---
+            if rec.void_warranty:
+                warranty_fields = ['pop_date', 'warranty_expiry_date', 'warranty_status']
+                intersect = set(vals.keys()) & set(warranty_fields)
+                if intersect:
+                    raise UserError(
+                        "Cannot edit POP/Warranty fields while 'Void Warranty' is checked."
+                    )
+    
             # Post to chatter if there are any changes
             if changes:
                 body = "<br/>".join(changes)
                 rec.message_post(body=body)
-
+    
         return super(RepairOrder, self).write(vals)
-
-
+    
 
 
     # ------------------------

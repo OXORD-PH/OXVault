@@ -34,16 +34,18 @@
 
                 <!-- Release -->
                 <button name="action_release"
-                        type="object"
                         string="Release"
-                        invisible="state != 'done'"
+                        type="object"
+                        class="btn-primary"
+                        invisible="state != 'done' or not sale_order_id"
                         groups="oxord_repair.group_repair_coordinator,base.group_system"/>
 
-                <button name="action_create_payment_invoice"
+
+                 <button name="action_create_payment_sale_order"
                         string="Payment"
                         type="object"
                         class="btn-primary"
-                        invisible="state not in ('done') or invoice_count &gt; 0"
+                        invisible="state != 'done' or sale_order_id"
                         groups="oxord_repair.group_repair_coordinator,base.group_system"/>
 
                 <!-- Cancel -->
@@ -82,7 +84,11 @@
                         class="oe_highlight"
                         context="{'default_repair_order_id': id}"
                         groups="oxord_repair.group_technical_head,base.group_system"/>
-
+           
+                <button name="action_custom_save"
+                    string="Save"
+                    type="object"
+                    class="btn-secondary"/>
 
 
                 <!-- Statusbar -->
@@ -119,6 +125,11 @@
                 <group string="OXORD Info">
                     <field name="service_type" widget="radio" options="{'horizontal': true}" readonly="readonly_customer_info"/>
                     <field name="company_id" readonly="readonly_customer_info"/>
+                        <!-- Branch -->
+                    <field name="branch"
+                           string="Branch"
+                           required="1"
+                           readonly="readonly_customer_info"/>
                 </group>
 
 
@@ -167,11 +178,28 @@
                 </group>
                 <!-- Right column -->
                 <group>
-                    <field name="pop_date" string="POP Date"/>
-                    <field name="warranty_expiry_date" string="Warranty Expiry Date" readonly="1"/>
-                    <field name="warranty_status" widget="badge" string="Warranty Status" readonly="1"/>   
-                    <field name="problem_ids" widget="many2many_tags" options="{'no_create': True}"/>
-                    <field name="estimated_cost" string="Total Cost" readonly="1"/>
+                    <field name="warranty_duration" 
+                           readonly="state != 'draft'"/>
+                    <field name="pop_date"
+                           class="warranty_css_class"
+                           widget="date"
+                           options="{'datepicker': {'format': 'yyyy-MM-dd'}}"
+                           readonly="state != 'draft'"/>
+                    
+                    <field name="warranty_expiry_date"
+                           readonly="1"
+                           class="warranty_css_class"/>
+                
+                    <field name="warranty_status"
+                           widget="badge"
+                           readonly="1"
+                           class="warranty_css_class"/>
+                    <field name="void_warranty" string="Void Warranty" class="o_field_inline" 
+                           readonly="state != 'draft'"/>
+                    <field name="problem_ids" widget="many2many_tags" options="{'no_create': True}" invisible="is_onsite"/>
+                    <field name="problem_detail"
+                           placeholder="Describe the issue in detail" invisible="is_onsite"/>
+                    <field name="estimated_cost" string="Problem Cost" readonly="1" invisible="is_onsite"/>
                 </group>
             </group>
 
@@ -202,10 +230,10 @@
 
                 <!-- Right column -->
                 <group>
-                    <field name="labor_amount" string="Labor Amount"/>
                     <field name="technician_remarks" string="Technician Remarks"/>
                 </group>
             </group>
+        
 
             <group class="oxord-card" string="Aging Information" col="2"
                   groups="base.group_system">

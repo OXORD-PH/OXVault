@@ -18,7 +18,7 @@
                             type="object"
                             string="Validate (Noted By)"
                             class="btn-primary"
-                            groups="oxord_repair.group_technical_head"
+                            groups="oxord_repair.group_technical_head,base.group_system"
                             invisible="state != 'draft'"/>
                                 
                     <!-- Print Button -->
@@ -26,6 +26,7 @@
                             string="Print"
                             type="action"
                             class="oe_highlight"
+                            groups="oxord_repair.group_technical_head,base.group_system"
                             invisible="state != 'validated'"/>
                 </header>
 
@@ -82,7 +83,7 @@
                     <div class="oxord-card">
                         <group string="Verification &amp; Approval">
                             <group>
-                                <field name="created_by" string="Checked &amp; Prepared by" readonly="1"/>
+                                <field name="created_by" string="Checked &amp; Prepared by"/>
                                 <field name="noted_by_id"/>
                             </group>
                         </group>

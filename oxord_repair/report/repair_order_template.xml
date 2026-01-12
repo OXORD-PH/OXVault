@@ -170,7 +170,6 @@
                                 <tr><td>Technician:</td><td><t t-esc="o.endorse_to_tech.name or '-'"/></td></tr>
                                 <tr><td>Action Taken:</td><td><t t-esc="o.action_taken or '-'"/></td></tr>
                                 <tr><td>Technician Remarks:</td><td><t t-esc="o.technician_remarks or '-'"/></td></tr>
-                                <tr><td>Labor Amount:</td><td><t t-esc="o.labor_amount or 0.0"/> PHP</td></tr>
                             </table>
                         </div>
 

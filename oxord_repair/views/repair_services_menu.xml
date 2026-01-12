@@ -11,7 +11,7 @@
 
         <!-- Repair Problems under Services -->
         <menuitem id="menu_repair_problem"
-                  name="Repair Problems"
+                  name="Repair Services / Price Lists"
                   parent="menu_repair_services"
                   action="action_repair_problem"
                   sequence="3"

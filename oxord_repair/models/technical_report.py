@@ -50,9 +50,11 @@ class TechnicalReport(models.Model):
 
     created_by = fields.Many2one(
         'res.users',
+        string='Checked & Prepared by',
         default=lambda self: self.env.user,
-        readonly=True
+        tracking=True
     )
+
 
     report_date = fields.Datetime(
         default=fields.Datetime.now,

@@ -1,6 +1,8 @@
 # oxord_repair/models/__init__.py
-
 from . import repair_order
+from . import job_order
+from . import pos_order
+from . import repair_line
 from . import technical_report
 from . import account_move
 from . import sale_order_inherit
