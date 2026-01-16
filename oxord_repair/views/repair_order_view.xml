@@ -209,7 +209,7 @@
                 <!-- Left column: Receiving Details -->
                 <group string="Receiving Details">
                     <field name="received_date" string="Date and Time" readonly="readonly_customer_info"/>
-                    <field name="received_by" string="Received By" required="1" readonly="readonly_customer_info"/>
+                    <field name="received_by" string="Received By" readonly="readonly_customer_info"/>
                     <field name="remarks" string="Remarks"/>
                 </group>
 
