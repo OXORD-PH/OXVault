@@ -46,7 +46,7 @@ class RepairOrder(models.Model):
     unit_type_id = fields.Many2one(
         'repair.unit.type',
         string="Unit Type",
-        required = True,
+        # required = True,
 
     )
 
@@ -54,7 +54,7 @@ class RepairOrder(models.Model):
         'hr.department',
         string="Department",
         domain="[('name','in',['DTLP','HHP','PCAV','PJT'])]",
-        required = True,
+        # required = True,
         help="Select the actual department"
     )
 
@@ -226,7 +226,9 @@ class RepairOrder(models.Model):
     # Receiving Details
     # ------------------------
     received_date = fields.Datetime(string="Received Date", default=fields.Datetime.now)
-    received_by = fields.Many2one('res.users', string="Received By", required=True)
+    received_by = fields.Many2one('res.users', string="Received By", 
+                                  # required=True
+                                 )
     remarks = fields.Text(string="Remarks")
 
     # ------------------------
