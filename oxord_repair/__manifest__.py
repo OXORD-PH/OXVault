@@ -9,7 +9,7 @@
     'data': [
         'security/groups.xml',
         'security/ir.model.access.csv',
-        'report/repair_order_template.xml',
+        # 'report/repair_order_template.xml',
         'report/repair_order_report.xml',
         'report/technical_report_template.xml', 
         'data/repair_sequence.xml',
