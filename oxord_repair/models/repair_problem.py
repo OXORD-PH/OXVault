@@ -37,10 +37,12 @@ class RepairProblem(models.Model):
         string='Category'
     )
 
-    estimated_cost = fields.Char(
+    estimated_cost = fields.Float(
         string='Estimated Cost',
-        help='Estimated repair cost (optional)'
+        digits=(12, 2),
+        help='Estimated repair cost'
     )
+
 
     product_id = fields.Many2one(
         'product.product',
