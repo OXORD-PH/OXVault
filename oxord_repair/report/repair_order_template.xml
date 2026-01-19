@@ -27,7 +27,7 @@
 
                         .oxord-section {
                             background-color:#e0f2f1;
-                            color:#004d40;
+                            color:#000000;
                             padding:2px 4px;
                             font-weight:bold;
                             margin-top:1.5mm;
@@ -78,7 +78,7 @@
                                      style="height:50px;"
                                      alt="Company Logo"/>
                             </td>
-                            <td style="color:#004d40;">
+                            <td style="color:#000000;">
                                 <div style="font-weight:bold; font-size:15px;">
                                     OXORD COMPUTER SOLUTIONS &amp; REPAIR CENTER
                                 </div>
@@ -95,7 +95,7 @@
                     <!-- BODY -->
                     <div class="oxord-body-wrapper">
 
-                        <div style="font-weight:bold; color:#004d40; font-size:15px;">
+                        <div style="font-weight:bold; color:#000000; font-size:15px;">
                             CLAIM FORM NO: <t t-esc="o.name"/>
                         </div>
 
@@ -213,6 +213,7 @@
                                 <li>In such a manner that i cannot claim my unit, I will send my authorized representative with an authorization letter and proof of identification to claim my unit.</li>
                                 <li>I shall hold OXORD Computer Solutions &amp; Repair Center free from liability and no responsibility in the event of loss or damage cause by a natural disaster such as a fire, flood, typhoon, or force majeure.</li>
                                 <li>I understand that I am responsible for saving or backing up any data on my unit's storage device(s) before sending it to OXORD for service. OXORD will not be responsible for any damage or loss due to the loss or corruption of data in my unit. Once OXORD receives the unit, I understand that it is ready for format (if needed).</li>
+                                <li>OXORD Computer Solutions &amp; Repair Center collects and processes personal information solely for legitimate business purposes, in accordance with the Philippine Data Privacy Act (RA 10173). Customer data is kept confidential and shared only when necessary for order fulfillment or as required by law.</li>
                             </ol>
                         
                             <!-- AGREEMENT SIGNATURE (RIGHT SIDE) -->
