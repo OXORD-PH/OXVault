@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <data>
+    <data noupdate="1">
 
         <!-- ================= Generic Service Product ================= -->
         <record id="product_service_repair_generic" model="product.product">
@@ -81,3 +81,4 @@
 
     </data>
 </odoo>
+
