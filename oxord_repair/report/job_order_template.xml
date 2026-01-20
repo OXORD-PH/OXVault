@@ -57,11 +57,11 @@
                                 <div style="font-size:17px; font-weight:bold; color:#004d40;">
                                     OXORD COMPUTER SOLUTIONS &amp; REPAIR CENTER
                                 </div>
-                                <div style="font-size:13px;">
+                                <div style="font-size:12px;">
                                     2F Robinsons Place Roxas, Pueblo de Panay Lawa-an, Roxas City
                                 </div>
                                 <div style="font-size:12px;">
-                                    (036) 621-XXXX | www.oxord.com.ph | FB: @OxordPH
+                                    La Hacienda Annex Bldg., Arnaldo Blvd., Roxas City, Capiz                                
                                 </div>
                             </td>
                         </tr>
@@ -198,9 +198,28 @@
                         OXORD Computer Solutions is an Authorized Service Center of SAMSUNG, LENOVO, ASUS, BROTHER, FUJI, RICOH
                         and Corporate Service Partner of EPSON
                     </div>
+                        <!-- FOOTER -->
+                    <div class="oxord-footer">
+                        <div>
+                            <strong>Office:</strong>
+                            (036) 522-2552 | GLOBE ·
+                            (036) 621-3621 | PLDT
+                        </div>
+                        <div>
+                            <strong>Service:</strong>
+                            0963 391 9832 | GLOBE ·
+                            (036) 520-7055
+                        </div>
+                        <div>
+                            <strong>Sales:</strong>
+                            0963 045 4012 | GLOBE ·
+                            (036) 621-3812 | PLDT
+                        </div>
+                    </div>
 
                 </t>
             </main>
         </t>
     </template>
 </odoo>
+
