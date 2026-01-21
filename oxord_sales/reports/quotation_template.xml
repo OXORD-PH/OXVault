@@ -8,12 +8,6 @@
 
                 <t t-foreach="docs" t-as="o">
 
-                    <!-- FULL PAGE BACKGROUND -->
-                    <img
-                        t-att-src="'/oxord_repair/static/src/img/background.jpg'"
-                        style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; object-fit:cover;"
-                    />
-
                     <style>
                         @page { size:A4; margin:0; }
                         main { page-break-after:avoid; page-break-before:avoid; }
@@ -250,3 +244,4 @@
     </template>
 
 </odoo>
+
