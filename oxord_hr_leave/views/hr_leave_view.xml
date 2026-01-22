@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- HR Leave Form: Custom Flow with 2-column letter -->
+    <record id="view_hr_leave_form_custom_flow" model="ir.ui.view">
+        <field name="name">hr.leave.form.custom.flow</field>
+        <field name="model">hr.leave</field>
+        <field name="inherit_id" ref="hr_holidays.hr_leave_view_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Header: buttons + statusbar -->
+            <xpath expr="//form/header" position="replace">
+                <header>
+                    <field name="state" invisible="1"/>
+
+                    <!-- Employee only button -->
+                    <button name="action_send_request" type="object" string="Send Request"
+                            class="btn-primary"
+                            invisible="flow_state != 'request'"/>
+
+                    <!-- Statusbar -->
+                    <field name="flow_state" widget="statusbar"
+                           statusbar_visible="request,approved,declined"/>
+                </header>
+            </xpath>
+
+            <!-- Form body: 2-column letter -->
+            <xpath expr="//sheet" position="inside">
+                <group class="oxord-card" col="2">
+
+                    <!-- Left column: Letter Metadata -->
+                    <group string="Explanation Details">
+                        <field name="request_date" string="Date Requested"/>
+                    </group>
+
+                    <!-- Right column: Letter Body -->
+                    <group>
+                        <div style="
+                            width:100%;
+                            max-width:100%;
+                            min-height:450px;
+                            border:1px solid #d9d9d9;
+                            border-radius:6px;
+                            padding:12px;
+                            box-sizing:border-box;
+                            overflow:hidden;
+                        ">
+                            <field name="letter_body"
+                                   widget="html"
+                                   nolabel="1"
+                                   placeholder="Write your letter here."
+                                   style="min-height:420px; width:100%; max-width:100%;"/>
+                        </div>
+                    </group>
+
+                </group>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

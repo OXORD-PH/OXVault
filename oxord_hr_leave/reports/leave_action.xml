@@ -1,0 +1,27 @@
+<odoo>
+    <!-- Custom Paper Format for Leave Application -->
+    <record id="paperformat_leave_application" model="report.paperformat">
+        <field name="name">Leave Application No Header</field>
+        <field name="default" eval="False"/>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">0</field>
+        <field name="margin_bottom">0</field>
+        <field name="margin_left">0</field>
+        <field name="margin_right">0</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">0</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <!-- Leave Application Report Action -->
+    <record id="action_report_leave_application" model="ir.actions.report">
+        <field name="name">Leave Application</field>
+        <field name="model">hr.leave</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">oxord_hr_leave.report_leave_application_document</field>
+        <field name="report_file">oxord_hr_leave.report_leave_application_document</field>
+        <field name="print_report_name">'Leave Application - %s' % (object.employee_id.name)</field>
+        <field name="paperformat_id" ref="oxord_hr_leave.paperformat_leave_application"/>
+    </record>
+</odoo>
