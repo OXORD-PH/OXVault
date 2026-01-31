@@ -82,7 +82,15 @@
                                 <tr><td>Address:</td><td><t t-esc="o.partner_street or '-'"/></td></tr>
                                 <tr><td>Phone:</td><td><t t-esc="o.partner_phone or '-'"/></td></tr>
                                 <tr><td>Email:</td><td><t t-esc="o.partner_email or '-'"/></td></tr>
-                                <tr><td>Isolation Date:</td><td><t t-esc="o.repair_order_id.pop_date and o.repair_order_id.pop_date.strftime('%Y-%m-%d %H:%M') or '-'"/></td></tr>
+                                <tr>
+                                    <td>Isolation Date:</td>
+                                    <td>
+                                        <t t-if="o.repair_order_id and o.repair_order_id.pop_date">
+                                            <t t-esc="o.repair_order_id.pop_date.strftime('%Y-%m-%d %H:%M')"/>
+                                        </t>
+                                        <t t-else>-</t>
+                                    </td>
+                                </tr>                            
                             </table>
                         </div>
 
@@ -139,3 +147,4 @@
         </t>
     </template>
 </odoo>
+
