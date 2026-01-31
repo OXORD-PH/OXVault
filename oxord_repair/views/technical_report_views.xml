@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_technical_report_form" model="ir.ui.view">
+        <field name="name">technical.report.form</field>
+        <field name="model">technical.report</field>
+        <field name="arch" type="xml">
+            <form string="Technical Report" create="false">
+                
+                <!-- HEADER BUTTON -->
+                <header>
+                    <!-- Statusbar -->
+                    <field name="state"
+                           widget="statusbar"
+                           statusbar_visible="draft,validated"/>
+                
+                    <!-- Validate (Technical Head only) -->
+                    <button name="action_validate"
+                            type="object"
+                            string="Validate (Noted By)"
+                            class="btn-primary"
+                            groups="oxord_repair.group_technical_head,base.group_system"
+                            invisible="state != 'draft'"/>
+                                
+                    <!-- Print Button -->
+                    <button name="%(action_report_technical_report)d"
+                            string="Print"
+                            type="action"
+                            class="oe_highlight"
+                            groups="oxord_repair.group_technical_head,base.group_system"
+                            invisible="state != 'validated'"/>
+                </header>
+
+                <sheet>
+
+                    <!-- BASIC INFO -->
+                    <div class="oxord-card">
+                        <group>
+                            <field name="name"/>
+                            <field name="repair_order_id"/>
+                        </group>
+                    </div>
+
+                    <!-- CUSTOMER + UNIT CARD -->
+                    <div class="oxord-card">
+                        <group>
+                            <!-- LEFT: CUSTOMER -->
+                            <group string="Customer Information">
+                                <field name="partner_id"/>
+                                <field name="partner_street"/>
+                                <field name="partner_email"/>
+                                <field name="partner_phone"/>
+                            </group>
+
+                            <!-- RIGHT: UNIT -->
+                            <group string="Unit Information">
+                                <field name="brand_id"/>
+                                <field name="model_id"/>
+                                <field name="serial"/>
+                                <field name="accessory_ids" widget="many2many_tags"/>
+                            </group>
+                        </group>
+                    </div>
+
+                    <!-- SERVICE RESOLUTION CARD -->
+                    <div class="oxord-card">
+                        <group string="Service Resolution" col="2">
+                            <!-- LEFT SIDE -->
+                            <group>
+                                <field name="problem_ids" widget="many2many_tags" readonly="1"/>
+                                <field name="problem_note" placeholder="Add additional notes about the problems..."/>
+                                <field name="status" widget="radio"/>
+                            </group>
+                        
+                            <!-- RIGHT SIDE -->
+                            <group>
+                                <field name="details" widget="text" placeholder="Describe actions taken during repair..."/>
+                                <field name="recommendation" placeholder="Enter recommendations if any..."/>
+                            </group>
+                        </group>
+                    </div>
+
+                    <!-- VERIFICATION & APPROVAL -->
+                    <div class="oxord-card">
+                        <group string="Verification &amp; Approval">
+                            <group>
+                                <field name="created_by" string="Checked &amp; Prepared by"/>
+                                <field name="noted_by_id"/>
+                            </group>
+                        </group>
+                    </div>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- LIST VIEW -->
+    <record id="view_technical_report_list" model="ir.ui.view">
+        <field name="name">technical.report.list</field>
+        <field name="model">technical.report</field>
+        <field name="arch" type="xml">
+            <list string="Technical Reports" create="false">
+                <field name="name" string="Technical Report Ref"/>
+                <field name="repair_order_id" string="WO"/>
+                <field name="status"/>
+                <field name="report_date"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ACTION FOR MENU (LIST + FORM) -->
+    <record id="action_technical_report" model="ir.actions.act_window">
+        <field name="name">Technical Reports</field>
+        <field name="res_model">technical.report</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ACTION FOR BUTTON (FORM ONLY) -->
+    <record id="action_technical_report_form" model="ir.actions.act_window">
+        <field name="name">New Technical Report</field>
+        <field name="res_model">technical.report</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+        <field name="context">{'default_repair_order_id': active_id}</field>
+    </record>
+</odoo>
