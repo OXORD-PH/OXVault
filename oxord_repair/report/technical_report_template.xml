@@ -23,7 +23,7 @@
                     <style>
                         @page {
                             size: A4;
-                            margin: 8mm 8mm 8mm 8mm;
+                            margin: 8mm;
                         }
                         main { page-break-after: avoid !important; page-break-before: avoid !important; }
                         .oxord-body-wrapper { width:100%; margin:0 auto; padding:2mm 6mm; box-sizing:border-box; }
@@ -64,15 +64,14 @@
 
                         <!-- TECHNICAL REPORT REF -->
                         <div style="font-weight:bold; color:#004d40; font-size:15px; margin-top:2.5mm;">
-                            TECHNICAL REPORT REF: <t t-esc="o.name"/>
+                            TECHNICAL REPORT REF: <t t-esc="o.name or '-'"/>
                         </div>
                         
                         <!-- DATE AND WO -->
                         <div style="font-size:12px; color:#004d40; margin-top:1mm;">
-                            Date: <t t-esc="o.report_date and o.report_date.strftime('%Y-%m-%d') or '-'"/><br/>
-                            WO: <t t-esc="o.repair_order_id.name or '-'"/>
+                            Date: <t t-esc="o.report_date.strftime('%Y-%m-%d') if o.report_date else '-'"/><br/>
+                            WO: <t t-esc="o.repair_order_id.name if o.repair_order_id else '-'"/>
                         </div>
-
 
                         <!-- CUSTOMER INFO -->
                         <div class="oxord-section">Customer Information</div>
@@ -85,10 +84,7 @@
                                 <tr>
                                     <td>Isolation Date:</td>
                                     <td>
-                                        <t t-if="o.repair_order_id and o.repair_order_id.pop_date">
-                                            <t t-esc="o.repair_order_id.pop_date.strftime('%Y-%m-%d %H:%M')"/>
-                                        </t>
-                                        <t t-else>-</t>
+                                        <t t-esc="o.repair_order_id.pop_date.strftime('%Y-%m-%d %H:%M') if o.repair_order_id and o.repair_order_id.pop_date else '-'"/>
                                     </td>
                                 </tr>                            
                             </table>
@@ -103,18 +99,17 @@
                                 <tr><td>Serial No.:</td><td><t t-esc="o.serial or '-'"/></td></tr>
                                 <tr><td>Accessories:</td><td><t t-esc="' , '.join([a.name for a in o.accessory_ids]) or '-'"/></td></tr>
                                 <tr><td>Problems:</td><td><t t-esc="' , '.join([p.name for p in o.problem_ids]) or '-'"/></td></tr>
-
                             </table>
                         </div>
 
                         <!-- SERVICE DETAILS -->
                         <div class="oxord-section">Service Resolution</div>
                         <div class="tech-box">
-                            <table>                                                                                       
+                            <table>
                                 <tr t-if="o.problem_note"><td>Problem Notes:</td><td><t t-esc="o.problem_note"/></td></tr>
                                 <tr><td>Action Taken:</td><td><t t-esc="o.details or '-'"/></td></tr>
                                 <tr><td>Recommendation:</td><td><t t-esc="o.recommendation or '-'"/></td></tr>
-                                <tr><td>Status:</td><td><t t-esc="dict(o._fields['status'].selection).get(o.status) or '-'"/></td></tr>
+                                <tr><td>Status:</td><td><t t-esc="dict(o._fields['status'].selection).get(o.status) if o.status else '-'"/></td></tr>
                             </table>
                         </div>
 
@@ -123,18 +118,15 @@
                         <div class="tech-box">
                             <table style="width:100%; border-collapse:collapse;">
                                 <tr>
-                                    <!-- LEFT SIDE: Acknowledged & Received -->
                                     <td style="width:40%; vertical-align:top; text-align:left;">
                                         <div><strong>         Acknowledged and Received by:</strong></div>
                                         <div><br/>         Authorized Representative Name &amp; Signature</div>
                                         <div>         Position: ___________</div>
                                         <div>         Date: ______________</div>
                                     </td>
-                        
-                                    <!-- RIGHT SIDE: Checked & Prepared / Noted By -->
                                     <td style="width:50%; vertical-align:top; text-align:left;">
-                                        <div><strong>            Checked &amp; Prepared by:</strong> <t t-esc="o.created_by.name"/> - Technician</div>
-                                        <div><strong><br/><br/>             Noted by:</strong> <t t-esc="o.noted_by_id.name"/> - Technical Head</div>
+                                        <div><strong>            Checked &amp; Prepared by:</strong> <t t-esc="o.created_by.name or '-'"/> - Technician</div>
+                                        <div><strong><br/><br/>             Noted by:</strong> <t t-esc="o.noted_by_id.name or '-'"/> - Technical Head</div>
                                     </td>
                                 </tr>
                             </table>
@@ -147,4 +139,3 @@
         </t>
     </template>
 </odoo>
-
