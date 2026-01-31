@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- ========================= -->
+        <!-- Tree View for Job Orders -->
+        <!-- ========================= -->
+        <record id="view_job_orders_list" model="ir.ui.view">
+            <field name="name">job.orders.list</field>
+            <field name="model">job.order</field>
+            <field name="arch" type="xml">
+                <list string="Job Orders">
+                    <field name="name"/>
+                    <field name="company_id"/>
+                    <field name="user_id" string="Order Taken By"/>
+                    <field name="servicer_id" string="Servicer"/>
+                    <field name="order_date" string="Order Date"/>
+                    <field name="state"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- ========================= -->
+        <!-- Form View (Coordinator Style, Like Repair Order) -->
+        <!-- ========================= -->
+        <record id="view_job_order_form_coordinator" model="ir.ui.view">
+            <field name="name">job.order.form.coordinator</field>
+            <field name="model">job.order</field>
+            <field name="arch" type="xml">
+                <form string="Job Order">
+
+                    <!-- Header -->
+                    <header>
+                        <field name="state" invisible="1"/>
+
+                        <!-- Action Buttons -->
+                        <button name="action_confirm"
+                                type="object"
+                                string="Confirm"
+                                class="btn-primary"
+                                invisible="state != 'draft'"/>
+                        <button name="action_start"
+                                type="object"
+                                string="Start Job"
+                                class="btn-success"
+                                invisible="state != 'confirmed'"/>
+                        <button name="action_done"
+                                type="object"
+                                string="Mark as Done"
+                                class="btn-primary"
+                                invisible="state != 'in_progress'"/>
+                        <button name="action_cancel"
+                                type="object"
+                                string="Cancel"
+                                class="btn-danger"
+                                invisible="state in ('done','cancelled')"/>
+
+                        <button name="action_print_job_order"
+                                type="object"
+                                string="Print"
+                                class="btn-secondary"/>
+                        
+
+                        <!-- Statusbar -->
+                        <field name="state" widget="statusbar"
+                               statusbar_visible="draft,confirmed,in_progress,done"/>
+                    </header>
+
+                    <!-- Left Sheet -->
+                    <sheet>
+                        <!-- Job Reference -->
+                        <group>
+                            <field name="name" string="Job Reference" readonly="1"
+                                   style="font-size:18px; font-weight:600;"/>
+                        </group>
+
+                        <!-- OXORD Info -->
+                        <group class="oxord-card" string="OXORD Info" col="2">
+                            <field name="company_id" string="Company" readonly="1"/>
+                            <field name="branch" string="Branch" required="1"/>
+                        </group>
+
+                        <!-- Customer + Job Info -->
+                        <group class="oxord-card" string="Job Info" col="2">
+                            <!-- Left column: Customer Info -->
+                            <group>
+                                <field name="partner_id" string="Name"/>
+                                <field name="company_id" string="Company"/>
+                                <field name="phone" string="Phone"/>
+
+                                    <!-- Job Type Radio -->
+                                <field name="job_type" widget="radio" options="{'horizontal': true}"/>
+                            
+                                <!-- Others text field (always visible) -->
+                                <field name="job_type_others" string="Other Job Type (fill only if 'Others')"/>
+
+                                                        </group>
+
+                            <!-- Right column: Job / Order Info -->
+                            <group>
+                                <field name="user_id" string="Order Taken By"/>
+                                <field name="order_date" string="Order Date"/>
+                                <field name="servicer_id" string="Servicer"/>
+                                <field name="job_name" string="Job Name / Location"/>
+                                <field name="job_phone" string="Job Phone"/>
+                            </group>
+                        </group>
+
+                        <!-- Job Description -->
+                        <group class="oxord-card" string="Description" colspan="2">
+                            <group colspan="2">
+                                <field name="description"
+                                       placeholder="Describe the job, issue, or request in detail..."
+                                       nolabel="1"/>
+                            </group>
+                        </group>
+
+
+                        <!-- Job Details -->
+                        <group class="oxord-card" string="Job Details" colspan="2">
+                            <!-- Full-width Job Name / Location -->
+                            <group colspan="2">
+                                <field name="job_status" widget="radio" options="{'horizontal': true}"/>
+                            </group>
+
+                            <!-- Left-Right Row: Comments | Job Status & Totals -->
+                            <group colspan="2">
+                                <group>
+                                    <field name="comments" string="Comments" placeholder="Enter comments here..."/>
+                                </group>
+                                <group>
+                                    <field name="total_materials"/>
+                                    <field name="total_labor"/>
+                                    <field name="tax"/>
+                                    <field name="total_due"/>
+                                </group>
+                            </group>
+
+                            <separator/>
+
+                            <!-- Left-Right Row: Date Completed | Work Ordered By -->
+                            <group colspan="2">
+                                <group>
+                                    <field name="date_completed" string="Date Completed" readonly="1"/>
+                                </group>
+                                <group>
+                                    <field name="ordered_by" string="Work Ordered By"/>
+                                </group>
+                            </group>
+                        </group>
+
+                        <!-- Notebook / Notes -->
+                        <notebook>
+                            <page string="Notes">
+                                <field name="note"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+
+                    <!-- Right-hand chatter / log notes -->
+                    <div class="oe_chatter">
+                        <chatter/>
+                    </div>
+
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
