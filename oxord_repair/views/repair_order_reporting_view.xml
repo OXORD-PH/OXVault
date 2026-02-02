@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+        <!-- Inherit the default Repairs Reporting Pivot -->
+        <record id="view_repair_order_pivot_inherit_aging" model="ir.ui.view">
+            <field name="name">repair.order.pivot.aging</field>
+            <field name="model">repair.order</field>
+            <field name="inherit_id" ref="repair.view_repair_pivot"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='create_date']" position="after">
+                    <field name="total_aging_days"/>
+                    <field name="repair_duration_days"/>
+                    <field name="parts_wait_days"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

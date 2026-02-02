@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- AR Tools Paper Format -->
+    <record id="paperformat_ar_forms" model="report.paperformat">
+        <field name="name">AR Tools</field>
+        <field name="default" eval="False"/>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">6</field>
+        <field name="margin_bottom">6</field>
+        <field name="margin_left">6</field>
+        <field name="margin_right">6</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">1</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <!-- AR Tools Report Action -->
+    <record id="action_report_ar_tools" model="ir.actions.report">
+        <field name="name">AR Tools - Acknowledgment Form</field>
+        <field name="model">ar.tools</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">oxord_repair.ar_tools_template</field>
+        <field name="report_file">oxord_repair.ar_tools_template</field>
+        <field name="print_report_name">'AR Tools - %s' % (object.name)</field>
+        <field name="paperformat_id" ref="oxord_repair.paperformat_ar_forms"/>
+    </record>
+
+    <!-- AR Free Service Report Action -->
+    <record id="action_report_ar_free_service" model="ir.actions.report">
+        <field name="name">AR Free Service - Acknowledgment Form</field>
+        <field name="model">ar.free.service</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">oxord_repair.ar_free_service_template</field>
+        <field name="report_file">oxord_repair.ar_free_service_template</field>
+        <field name="print_report_name">'AR Free Service - %s' % (object.name)</field>
+        <field name="paperformat_id" ref="oxord_repair.paperformat_ar_forms"/>
+    </record>
+
+
+</odoo>
