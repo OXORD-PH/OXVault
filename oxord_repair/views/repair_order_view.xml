@@ -9,14 +9,18 @@
       <field name="inherit_id" ref="repair.view_repair_order_form"/>
       <field name="arch" type="xml">
           
-
-
         <!-- Add custom header with state buttons -->
         <xpath expr="//form/header" position="replace">
             <header>
                 <!-- Hidden state field -->
                 <field name="state" invisible="1"/>
-
+                                
+                <!-- <button name="action_send_for_signature"
+                        type="object"
+                        string="Request Signature"
+                        class="btn-primary"
+                        invisible="sign_request_id"/>
+ -->
                 <!-- Start Repair -->
                 <button name="action_start_repair"
                         type="object"
@@ -157,49 +161,36 @@
             </group>
 
 
-
-
-
-            <!-- Unit Information Card -->
-            <group class="oxord-card" string="Unit Information" col="2">
-                <!-- Left column -->
-                <group>
-                    <field name="brand_id" options="{'no_create': True}"
-                           readonly="readonly_customer_info"/>
-                    <field name="model_id"
-                          string="Model"
-                          options="{'no_create': True}"
-                          readonly="readonly_customer_info"/>
+            <!-- Unit Information + Warranty Details Card -->
+            <group class="oxord-card" colspan="2">
+            
+                <!-- Unit Information + Problems (Left Column) -->
+                <group string="Unit Information">
+                    <field name="brand_id" options="{'no_create': True}" readonly="readonly_customer_info"/>
+                    <field name="model_id" string="Model" options="{'no_create': True}" readonly="readonly_customer_info"/>
                     <field name="serial" string="Serial"  readonly="readonly_customer_info"/>
                     <field name="accessory_ids" widget="many2many_tags"/>
                     <field name="password" string="Password"/>
-
+            
+                    <!-- Problem Info -->
+                    <field name="problem_ids" widget="many2many_tags" options="{'no_create': True}" invisible="is_onsite"/>
+                    <field name="problem_detail" placeholder="Describe the issue in detail" invisible="is_onsite"/>
+                    <field name="estimated_cost" string="Problem Cost" readonly="1" invisible="is_onsite"/>
                 </group>
-                <!-- Right column -->
-                <group>
-                    <field name="warranty_duration" 
-                           readonly="state != 'draft'"/>
+            
+                <!-- Warranty Details (Right Column) -->
+                <group string="Warranty Details">
+                    <field name="warranty_duration" readonly="state != 'draft'"/>
                     <field name="pop_date"
                            class="warranty_css_class"
                            widget="date"
                            options="{'datepicker': {'format': 'yyyy-MM-dd'}}"
                            readonly="state != 'draft'"/>
-                    
-                    <field name="warranty_expiry_date"
-                           readonly="1"
-                           class="warranty_css_class"/>
-                
-                    <field name="warranty_status"
-                           widget="badge"
-                           readonly="1"
-                           class="warranty_css_class"/>
-                    <field name="void_warranty" string="Void Warranty" class="o_field_inline" 
-                           readonly="state != 'draft'"/>
-                    <field name="problem_ids" widget="many2many_tags" options="{'no_create': True}" invisible="is_onsite"/>
-                    <field name="problem_detail"
-                           placeholder="Describe the issue in detail" invisible="is_onsite"/>
-                    <field name="estimated_cost" string="Problem Cost" readonly="1" invisible="is_onsite"/>
+                    <field name="warranty_expiry_date" readonly="1" class="warranty_css_class"/>
+                    <field name="warranty_status" widget="badge" readonly="1" class="warranty_css_class"/>
+                    <field name="void_warranty" string="Void Warranty" class="o_field_inline" readonly="state != 'draft'"/>
                 </group>
+            
             </group>
 
             <!-- Side-by-side Receiving and Releasing Details -->
@@ -219,7 +210,7 @@
 
             </group>
 
-            <group class="oxord-card" string="Technician Assigned">
+            <group class="oxord-card" colspan="2" string="Technician Assigned">
                 <group>
                                 
                     <field name="technician_line_ids" string="">
