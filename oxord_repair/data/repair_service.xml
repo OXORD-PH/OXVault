@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <data noupdate="1">
+    <data>
 
         <!-- ================= HHP – PHONE REPAIR SERVICES ================= -->
         <record id="repair_hhp_phone_diagnostic" model="repair.problem">
@@ -1260,3 +1260,4 @@
 
     </data>
 </odoo>
+
