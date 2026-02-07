@@ -1,0 +1,143 @@
+<odoo>
+    <data>
+        <!-- ================= Brand Unit Types ================= -->
+        <!-- HP Brand -->
+        <record id="brand_hp" model="product.brand">
+            <field name="name">HP</field>
+        </record>
+
+        <record id="brand_hp_laptop" model="product.brand.unit.type">
+            <field name="brand_id" ref="brand_hp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="labor_amount">750</field>
+            <field name="service_type">carry_in</field>
+        </record>
+
+        <record id="brand_hp_desktop" model="product.brand.unit.type">
+            <field name="brand_id" ref="brand_hp"/>
+            <field name="unit_type_id" ref="unit_type_desktop"/>
+            <field name="labor_amount">750</field>
+            <field name="service_type">carry_in</field>
+        </record>
+
+        <!-- Lenovo Brand -->
+        <record id="brand_lenovo" model="product.brand">
+            <field name="name">Lenovo</field>
+        </record>
+
+        <record id="brand_lenovo_laptop" model="product.brand.unit.type">
+            <field name="brand_id" ref="brand_lenovo"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="labor_amount">400</field>
+            <field name="service_type">carry_in</field>
+        </record>
+
+        <!-- Canon Brand -->
+        <record id="brand_canon" model="product.brand">
+            <field name="name">Canon</field>
+        </record>
+
+        <record id="brand_canon_printer" model="product.brand.unit.type">
+            <field name="brand_id" ref="brand_canon"/>
+            <field name="unit_type_id" ref="unit_type_canon_printer"/>
+            <field name="labor_amount">600</field>
+            <field name="service_type">onsite</field>
+        </record>
+
+        <!-- Brother Brand -->
+        <record id="brand_brother" model="product.brand">
+            <field name="name">Brother</field>
+        </record>
+
+        <record id="brand_brother_printer" model="product.brand.unit.type">
+            <field name="brand_id" ref="brand_brother"/>
+            <field name="unit_type_id" ref="unit_type_brother_printer"/>
+            <field name="labor_amount">400</field>
+            <field name="service_type">carry_in</field>
+        </record>
+
+        <!-- Epson Brand -->
+        <record id="brand_epson" model="product.brand">
+            <field name="name">EPSON</field>
+        </record>
+
+        <record id="brand_epson_printer" model="product.brand.unit.type">
+            <field name="brand_id" ref="brand_epson"/>
+            <field name="unit_type_id" ref="unit_type_epson_printer"/>
+            <field name="labor_amount">500</field>
+            <field name="service_type">carry_in</field>
+        </record>
+
+        <!-- Acer Brand -->
+        <record id="brand_acer" model="product.brand">
+            <field name="name">Acer</field>
+        </record>
+
+        <record id="brand_acer_laptop" model="product.brand.unit.type">
+            <field name="brand_id" ref="brand_acer"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="labor_amount">450</field>
+            <field name="service_type">carry_in</field>
+        </record>
+
+        <!-- ASUS Brand -->
+        <record id="brand_asus" model="product.brand">
+            <field name="name">ASUS</field>
+        </record>
+
+        <record id="brand_asus_laptop" model="product.brand.unit.type">
+            <field name="brand_id" ref="brand_asus"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="labor_amount">11</field>
+            <field name="service_type">carry_in</field>
+        </record>
+
+        <!-- MSI Brand -->
+        <record id="brand_msi" model="product.brand">
+            <field name="name">MSI</field>
+        </record>
+
+        <record id="brand_msi_laptop" model="product.brand.unit.type">
+            <field name="brand_id" ref="brand_msi"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="labor_amount">602</field>
+            <field name="service_type">carry_in</field>
+        </record>
+
+        <!-- Machenike Brand -->
+        <record id="brand_machenike" model="product.brand">
+            <field name="name">Machenike</field>
+        </record>
+
+        <record id="brand_machenike_laptop" model="product.brand.unit.type">
+            <field name="brand_id" ref="brand_machenike"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="labor_amount">500</field>
+            <field name="service_type">carry_in</field>
+        </record>
+
+        <!-- Chuwi Brand -->
+        <record id="brand_chuwi" model="product.brand">
+            <field name="name">Chuwi</field>
+        </record>
+
+        <record id="brand_chuwi_laptop" model="product.brand.unit.type">
+            <field name="brand_id" ref="brand_chuwi"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="labor_amount">400</field>
+            <field name="service_type">carry_in</field>
+        </record>
+
+        <!-- Carry In Brand -->
+        <record id="brand_carry_in" model="product.brand">
+            <field name="name">Carry In</field>
+        </record>
+
+        <record id="brand_carry_in_laptop" model="product.brand.unit.type">
+            <field name="brand_id" ref="brand_carry_in"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="labor_amount">350</field>
+            <field name="service_type">carry_in</field>
+        </record>
+    </data>
+</odoo>

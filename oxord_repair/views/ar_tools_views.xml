@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- List view -->
+        <record id="view_ar_tools_list" model="ir.ui.view">
+            <field name="name">ar.tools.list</field>
+            <field name="model">ar.tools</field>
+            <field name="arch" type="xml">
+                <list string="AR for Tools">
+                    <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="date"/>
+                    <field name="department_id"/>
+                    <field name="state"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Form view -->
+        <record id="view_ar_tools_form" model="ir.ui.view">
+            <field name="name">ar.tools.form</field>
+            <field name="model">ar.tools</field>
+            <field name="arch" type="xml">
+                <form string="AR for Tools">
+                    <header>
+                        <button name="action_generate_reference"
+                                string="Save &amp; Generate"
+                                type="object"
+                                class="btn-primary"
+                                invisible="state != 'draft'"/>
+
+                        <button name="%(action_report_ar_tools)d"
+                                string="Print"
+                                type="action"
+                                class="btn-secondary"
+                                invisible="state != 'saved'"/>
+                        
+                        <field name="state" widget="statusbar" readonly="1"/>
+                    </header>
+                    <sheet>
+                        <!-- TITLE -->
+                        <div class="oe_title">
+                            <h1>Acknowledgement Form</h1>
+                        </div>
+                        <group>
+                                
+                            <group>
+                                <field name="employee_id"/>
+                                <field name="department_id"/>
+                                <field name="date"/>
+                            </group>
+                
+                            <group>
+                                <div class="oe_title" style="font-size:32px; font-weight:bold; text-align:center;">
+                                    <field name="name" string="AR Reference" readonly="1"/>
+                                </div>
+                            </group>   
+                        </group>
+                        
+                        <notebook>
+                            <page string="Tools / Equipment">
+                                <field name="tool_line_ids">
+                                    <list string="Tools / Equipment" editable="bottom">
+                                        <field name="product_name"/>
+                                        <field name="quantity"/>
+                                        <field name="notes"/>
+                                    </list>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action -->
+        <record id="action_ar_tools" model="ir.actions.act_window">
+            <field name="name">AR for Tools</field>
+            <field name="res_model">ar.tools</field>
+            <field name="view_mode">list,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add a new acknowledgment for tools/equipment.
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>
