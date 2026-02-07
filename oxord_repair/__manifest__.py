@@ -15,7 +15,7 @@
         'data/repair_sequence.xml',
         'data/repair_problem_data.xml',
         'data/product_brand_data.xml',
-        # 'data/repair_service.xml',
+        'data/repair_service.xml',
         'data/job_order_sequence.xml',
         'data/ar_tools_sequence.xml',
         'data/technical_report_sequence.xml',
