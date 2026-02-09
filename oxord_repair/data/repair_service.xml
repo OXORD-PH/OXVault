@@ -662,7 +662,6 @@
             <field name="product_id" ref="product_service_repair_generic"/>
         </record>
         
-            <field name="product_id" ref="product_service_repair_generic"/>
         <record id="service_laptop_backup_files_below_15gb" model="repair.problem">
             <field name="department_id" ref="hr_department_dtlp"/>
             <field name="unit_type_id" ref="unit_type_laptop"/>
@@ -1260,4 +1259,5 @@
 
     </data>
 </odoo>
+
 
