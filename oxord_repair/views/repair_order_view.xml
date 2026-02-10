@@ -15,12 +15,16 @@
                 <!-- Hidden state field -->
                 <field name="state" invisible="1"/>
                                 
-                <!-- <button name="action_send_for_signature"
+                <!-- Request Signature -->
+                <button name="action_send_for_signature"
                         type="object"
                         string="Request Signature"
                         class="btn-primary"
-                        invisible="sign_request_id"/>
- -->
+                        invisible="state not in ('done') or sign_request_id"
+                        groups="oxord_repair.group_repair_coordinator,oxord_repair.group_technical_head,base.group_system"
+                        confirm="Send this Order for signature?"/>
+
+ 
                 <!-- Start Repair -->
                 <button name="action_start_repair"
                         type="object"
