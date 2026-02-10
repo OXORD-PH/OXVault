@@ -431,7 +431,37 @@ class RepairOrder(models.Model):
         compute="_compute_readonly_technician_line",
         store=True
     )
+
+    sign_request_id = fields.Many2one('sign.request', string="Signature Request")  # Link to signature
+
+
+    def action_send_for_signature(self):
+        self.ensure_one()
     
+        action = self.env.ref('sign.action_sign_send_request').read()[0]
+    
+        action['context'] = {
+            'default_res_model': self._name,
+            'default_res_id': self.id,
+            'default_partner_id': self.partner_id.id if self.partner_id else False,
+            'default_reference': self.name,
+        }
+    
+        return action
+
+
+    def action_open_signature_wizard(self):
+        return {
+            'name': 'Request Signature',
+            'type': 'ir.actions.act_window',
+            'res_model': 'repair.signature.wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {'default_repair_order_id': self.id},
+        }
+    
+
+
     @api.onchange('unit_type_id')
     def _onchange_unit_type_for_brand(self):
         """Filter Brand based on Unit Type and reset dependent fields."""
@@ -1399,29 +1429,7 @@ class RepairOrder(models.Model):
                         "Cannot edit POP/Warranty fields while 'Void Warranty' is checked."
                     )
     
-            # --- AUTOMATIC TECHNICIAN MANAGEMENT ---
-            # if 'current_technician_id' in vals:
-            #     new_tech_id = vals['current_technician_id']
-            #     now_dt = fields.Datetime.now()
-            
-            #     # End previous technician lines
-            #     previous_lines = rec.technician_line_ids.filtered(
-            #         lambda l: not l.end_date and l.technician_id.id != new_tech_id
-            #     )
-            #     previous_lines.write({'end_date': now_dt})
-            
-            #     # Only create a line if no active line exists for this tech
-            #     line = rec.technician_line_ids.filtered(
-            #         lambda l: l.technician_id.id == new_tech_id and not l.end_date
-            #     )
-            #     if not line:
-            #         self.env['repair.technician.line'].create({
-            #             'repair_order_id': rec.id,
-            #             'technician_id': new_tech_id,
-            #             'start_date': now_dt,
-            #         })
 
-    
             # Post to chatter if there are any changes
             if changes:
                 body = "<br/>".join(changes)
