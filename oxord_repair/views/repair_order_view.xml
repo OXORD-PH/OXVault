@@ -15,12 +15,16 @@
                 <!-- Hidden state field -->
                 <field name="state" invisible="1"/>
                                 
-                <!-- <button name="action_send_for_signature"
+                <!-- Request Signature Draft -->
+                <button name="action_request_signature_draft"
                         type="object"
-                        string="Request Signature"
+                        string="Request Receiving Signature"
                         class="btn-primary"
-                        invisible="sign_request_id"/>
- -->
+                        invisible="receiving_signature_state != 'not_requested'"
+                        groups="oxord_repair.group_repair_coordinator,oxord_repair.group_technical_head,base.group_system"
+                        confirm="Send Receiving Signature request?"/>
+
+ 
                 <!-- Start Repair -->
                 <button name="action_start_repair"
                         type="object"
@@ -201,6 +205,11 @@
                     <field name="received_date" string="Date and Time" readonly="readonly_customer_info"/>
                     <field name="received_by" string="Received By" required="1" readonly="readonly_customer_info"/>
                     <field name="remarks" string="Remarks"/>
+                    <field name="signed_attachment_ids" 
+                           widget="many2many_binary" 
+                           string="Signed Documents"
+                           readonly="1"
+                           invisible="receiving_signature_state != 'signed'"/>
                 </group>
 
                 <!-- Right column: Releasing Details -->
@@ -247,7 +256,6 @@
               </group>
             </group>
         </xpath>
-          
       </field>
     </record>
 
