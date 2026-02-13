@@ -1,0 +1,1262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- ================= HHP – PHONE REPAIR SERVICES ================= -->
+        <record id="repair_hhp_phone_diagnostic" model="repair.problem">
+            <field name="name">Diagnostic / Testing</field>
+            <field name="department_id" ref="hr_department_hhp"/>
+            <field name="unit_type_id" ref="unit_type_phone"/>
+            <field name="estimated_cost">150</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_hhp_phone_battery_labor" model="repair.problem">
+            <field name="name">Battery Replacement Labor</field>
+            <field name="department_id" ref="hr_department_hhp"/>
+            <field name="unit_type_id" ref="unit_type_phone"/>
+            <field name="estimated_cost">500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_hhp_phone_screen_labor" model="repair.problem">
+            <field name="name">Screen Replacement Labor</field>
+            <field name="department_id" ref="hr_department_hhp"/>
+            <field name="unit_type_id" ref="unit_type_phone"/>
+            <field name="estimated_cost">800</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_hhp_phone_charging_port" model="repair.problem">
+            <field name="name">Charging Port / Flex Cable Labor</field>
+            <field name="department_id" ref="hr_department_hhp"/>
+            <field name="unit_type_id" ref="unit_type_phone"/>
+            <field name="estimated_cost">500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_hhp_phone_rear_glass" model="repair.problem">
+            <field name="name">Rear Glass / Back Cover Labor</field>
+            <field name="department_id" ref="hr_department_hhp"/>
+            <field name="unit_type_id" ref="unit_type_phone"/>
+            <field name="estimated_cost">500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_hhp_phone_water_damage" model="repair.problem">
+            <field name="name">Water Damage Cleaning</field>
+            <field name="department_id" ref="hr_department_hhp"/>
+            <field name="unit_type_id" ref="unit_type_phone"/>
+            <field name="estimated_cost">800</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_hhp_phone_software_fix" model="repair.problem">
+            <field name="name">Software / OS Fix</field>
+            <field name="department_id" ref="hr_department_hhp"/>
+            <field name="unit_type_id" ref="unit_type_phone"/>
+            <field name="estimated_cost">300</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <!-- ================= DTLP – Desktop Hardware Services ================= -->
+        <record id="repair_problem_desktop_checkup" model="repair.problem">
+            <field name="name">DESKTOP CHECK-UP</field>
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_desktop"/>
+            <field name="estimated_cost">0</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_problem_desktop_no_power" model="repair.problem">
+            <field name="name">DESKTOP NO POWER</field>
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_desktop"/>
+            <field name="estimated_cost">500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_problem_desktop_no_display" model="repair.problem">
+            <field name="name">DESKTOP NO DISPLAY</field>
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_desktop"/>
+            <field name="estimated_cost">800</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_problem_desktop_no_audio" model="repair.problem">
+            <field name="name">DESKTOP NO AUDIO</field>
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_desktop"/>
+            <field name="estimated_cost">350</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_problem_desktop_cleaning" model="repair.problem">
+            <field name="name">DESKTOP CLEANING</field>
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_desktop"/>
+            <field name="estimated_cost">800</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_problem_desktop_preventive_maintenance" model="repair.problem">
+            <field name="name">
+                DESKTOP PREVENTIVE MAINTENANCE (W/ PARTS OR W/OUT) (MOBO, PSU, HDD, MEM, SSD)
+            </field>
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_desktop"/>
+            <field name="estimated_cost">500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_problem_desktop_no_lan" model="repair.problem">
+            <field name="name">DESKTOP NO LAN / ETHERNET (W/ PARTS OR W/OUT)</field>
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_desktop"/>
+            <field name="estimated_cost">500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_problem_desktop_grounded_mobo" model="repair.problem">
+            <field name="name">DESKTOP GROUNDED / REPAIR MOBO PARTS W/ LABOR</field>
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_desktop"/>
+            <field name="estimated_cost">800</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <!-- DTLP - Desktop / Others Services -->
+        <record id="repair_desktop_burning_dvd_cd" model="repair.problem">
+            <field name="name">Burning Data Files in DVD/CD</field>
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_desktop"/>
+            <field name="estimated_cost">65</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_desktop_flash_recovery_8_32gb" model="repair.problem">
+            <field name="name">Flash Drive Recovery w/ Cleaning 8/16/32 GB</field>
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_desktop"/>
+            <field name="estimated_cost">350</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_desktop_flash_recovery_500gb" model="repair.problem">
+            <field name="name">Flash Drive Recovery w/ Cleaning 500GB</field>
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_desktop"/>
+            <field name="estimated_cost">500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_desktop_flash_recovery_1tb_2tb" model="repair.problem">
+            <field name="name">Flash Drive Recovery w/ Cleaning 1TB - 2TB</field>
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_desktop"/>
+            <field name="estimated_cost">2500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_desktop_hdd_enclosure_assemble" model="repair.problem">
+            <field name="name">HDD Enclosure Assemble</field>
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_desktop"/>
+            <field name="estimated_cost">150</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_desktop_bios_update_any_brand" model="repair.problem">
+            <field name="name">BIOS Update Any Brand Desktop &amp; Mobile Units</field>
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_desktop"/>
+            <field name="estimated_cost">500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_desktop_bios_flash_hardware_firmware" model="repair.problem">
+            <field name="name">BIOS Flash Hardware and Firmware</field>
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_desktop"/>
+            <field name="estimated_cost">3500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_desktop_adobe_lightroom_classic" model="repair.problem">
+            <field name="name">Adobe Lightroom Classic v9.0 Multilingual</field>
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_desktop"/>
+            <field name="estimated_cost">993.384</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_desktop_install_ssd_50gb_below" model="repair.problem">
+            <field name="name">Install SSD/M.2/HDD Storage in Laptop/Desktop/AIO (50GB Below) – Migrate OS</field>
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_desktop"/>
+            <field name="estimated_cost">1000</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_desktop_install_ssd_50gb_1tb" model="repair.problem">
+            <field name="name">Install SSD/M.2/HDD Storage in Laptop/Desktop/AIO (50GB up to 1TB) – Migrate OS</field>
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_desktop"/>
+            <field name="estimated_cost">2500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_desktop_install_ssd_50gb_4tb" model="repair.problem">
+            <field name="name">Install SSD/M.2/HDD Storage in Laptop/Desktop/AIO (50GB up to 4TB) – Migrate OS</field>
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_desktop"/>
+            <field name="estimated_cost">5000</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_desktop_assemble_by_tomer" model="repair.problem">
+            <field name="name">Assemble Desktop Items by Tomer</field>
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_desktop"/>
+            <field name="estimated_cost">500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_desktop_assemble_install_os_by_tomer" model="repair.problem">
+            <field name="name">Assemble Desktop Items by Tomer &amp; Install OS</field>
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_desktop"/>
+            <field name="estimated_cost">1000</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_desktop_merriam_webster_dictionary" model="repair.problem">
+            <field name="name">Merriam-Webster's Collegiate Dictionary and Thesaurus 3.0</field>
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_desktop"/>
+            <field name="estimated_cost">400</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_desktop_gaming_cleaning_no_power" model="repair.problem">
+            <field name="name">Desktop Gaming Cleaning with No Power</field>
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_desktop"/>
+            <field name="estimated_cost">800</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_desktop_regular_cleaning_no_power" model="repair.problem">
+            <field name="name">Desktop Regular Cleaning with No Power</field>
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_desktop"/>
+            <field name="estimated_cost">500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        
+        <!-- ================= DTLP – Laptop Hardware Services ================= -->
+        <record id="repair_problem_laptop_checkup" model="repair.problem">
+            <field name="name">Laptop Check-Up</field>
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="estimated_cost">0</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_problem_laptop_no_power" model="repair.problem">
+            <field name="name">Laptop No Power</field>
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="estimated_cost">2500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_problem_laptop_no_display" model="repair.problem">
+            <field name="name">Laptop No Display</field>
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="estimated_cost">2500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_problem_laptop_no_audio" model="repair.problem">
+            <field name="name">Laptop No Audio</field>
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="estimated_cost">1500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_problem_laptop_cleaning" model="repair.problem">
+            <field name="name">Laptop Cleaning</field>
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="estimated_cost">1500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_problem_laptop_preventive_maintenance" model="repair.problem">
+            <field name="name">Laptop Preventive Maintenance (W/ Parts or W/Out) (MOBO, HDD, MEM, SSD)</field>
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="estimated_cost">350</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_problem_laptop_no_lan" model="repair.problem">
+            <field name="name">Laptop No LAN / Ethernet (W/ Parts or W/Out)</field>
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="estimated_cost">250</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="repair_problem_laptop_grounded_mobo" model="repair.problem">
+            <field name="name">Laptop Grounded / Repair MOBO Parts W/ Labor</field>
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="estimated_cost">2500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <!-- ================= DTLP – Laptop Spftware Services ================= -->
+        <record id="service_laptop_reprogram_reset" model="repair.problem">
+            <field name="name">Laptop Reprogram / Reformat / Reset</field>
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="estimated_cost">600</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_no_drivers_graphics" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop No Drivers (Graphics)</field>
+            <field name="estimated_cost">350</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_no_drivers_others" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop No Drivers (Audio, USB, Ethernet, WiFi, Bluetooth)</field>
+            <field name="estimated_cost">350</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_reprogram_backup_below_15gb" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Reprogram w/ Backup Files (Below 15GB)</field>
+            <field name="estimated_cost">900</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_reprogram_backup_above_15gb" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Reprogram w/ Backup Files (15GB Up)</field>
+            <field name="estimated_cost">1300</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_recover_os_with_data" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Recover OS with Files/Data</field>
+            <field name="estimated_cost">1500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_basic_software" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install Software No OS (Basic Software)</field>
+            <field name="estimated_cost">500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_os_drivers" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install OS w/ Drivers Only</field>
+            <field name="estimated_cost">500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <!-- Games -->
+        <record id="service_laptop_install_offline_games" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install Offline Games (5 Games)</field>
+            <field name="estimated_cost">500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_online_games" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install Online Games (3 Games)</field>
+            <field name="estimated_cost">500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_aaa_games" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install AAA / High-End Games (Each)</field>
+            <field name="estimated_cost">500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <!-- Password & Office -->
+        <record id="service_laptop_remove_password_user" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Remove Password (User and Client)</field>
+            <field name="estimated_cost">500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_remove_password_admin" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Remove Password (Administrator and Microsoft Account)</field>
+            <field name="estimated_cost">1000</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_ms_office_2010" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install MS Office 2010 (Third Party)</field>
+            <field name="estimated_cost">250</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_ms_office_2013" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install MS Office 2013 (Third Party)</field>
+            <field name="estimated_cost">350</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_ms_office_2016" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install MS Office 2016 (OS Pro Only, Third Party)</field>
+            <field name="estimated_cost">500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_ms_office_2019" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install MS Office 2019 (OS Pro Only, Third Party)</field>
+            <field name="estimated_cost">800</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_ms_office_365_license" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install MS Office 365 (License) Labor</field>
+            <field name="estimated_cost">350</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_ms_office_2016_license" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install MS Office 2016 (License) Labor</field>
+            <field name="estimated_cost">500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_ms_office_2019_license" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install MS Office 2019 (License) Labor</field>
+            <field name="estimated_cost">600</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <!-- Adobe & Video Editors -->
+        <record id="service_laptop_install_adobe_photoshop_cs4" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install Adobe Photoshop CS4 (Photo Editor)</field>
+            <field name="estimated_cost">150</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_adobe_photoshop_cs5_cs6" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install Adobe Photoshop CS5/CS6 (Photo Editor)</field>
+            <field name="estimated_cost">350</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_adobe_photoshop_cc_lightroom" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install Adobe Photoshop CC / Lightroom (Photo Editor)</field>
+            <field name="estimated_cost">500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_wondershare_filmora" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install Wondershare Filmora (Video Editor)</field>
+            <field name="estimated_cost">350</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_power_director" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install Power Director (Video Editor)</field>
+            <field name="estimated_cost">500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_sony_vegas" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install Sony Vegas (Video Editor)</field>
+            <field name="estimated_cost">500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_corel_draw_graphics_suite" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install Corel Draw Graphics Suite</field>
+            <field name="estimated_cost">800</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <!-- Misc Software -->
+        <record id="service_laptop_install_internet_software" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install Internet Software Each (Chrome, Mozilla, Opera, Brave)</field>
+            <field name="estimated_cost">50</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_media_player" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install Media Player Each (VLC, Media Codec, Etc)</field>
+            <field name="estimated_cost">50</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_net_framework" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install .NET Framework in Win 7</field>
+            <field name="estimated_cost">250</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_winrar_flash" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install WinRAR / Flash Player</field>
+            <field name="estimated_cost">50</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_pdf_readers" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install PDF Readers (Adobe Reader, Acrobat Reader, Foxit Reader)</field>
+            <field name="estimated_cost">150</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_reactivate_office_2019" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Re-Activate Office 2019</field>
+            <field name="estimated_cost">600</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_reactivate_office_2016" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Re-Activate Office 2016</field>
+            <field name="estimated_cost">450</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_reactivate_office_2013" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Re-Activate Office 2013</field>
+            <field name="estimated_cost">350</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_reactivate_office_2010" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Re-Activate Office 2010</field>
+            <field name="estimated_cost">250</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_reactivate_os" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Re-Activate OS (Win 7 &amp; Win 10)</field>
+            <field name="estimated_cost">250</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_anydesk_teamviewer" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install AnyDesk / TeamViewer</field>
+            <field name="estimated_cost">350</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_antivirus" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install 2nd Layer Protection Malware and Antivirus (Smadav)</field>
+            <field name="estimated_cost">350</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_update_windows" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Update Windows Operating System (OS)</field>
+            <field name="estimated_cost">500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_misc_software" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install SPSS / eBIR Forms / Nitro Software</field>
+            <field name="estimated_cost">400</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_migrate_os" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Migrate OS</field>
+            <field name="estimated_cost">1500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="service_laptop_backup_files_below_15gb" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Backup Files/Data Only (Below 15GB)</field>
+            <field name="estimated_cost">500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_backup_files_15gb_50gb" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Backup Files/Data Only (15GB Up to 50GB)</field>
+            <field name="estimated_cost">1000</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_update_bios" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Update BIOS</field>
+            <field name="estimated_cost">400</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <!-- AutoCAD Versions -->
+        <record id="service_laptop_install_autocad_2014" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install AutoCAD 2014</field>
+            <field name="estimated_cost">700</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_autocad_2015" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install AutoCAD 2015</field>
+            <field name="estimated_cost">800</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_autocad_2016" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install AutoCAD 2016</field>
+            <field name="estimated_cost">900</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_autocad_2017" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install AutoCAD 2017</field>
+            <field name="estimated_cost">1000</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_autocad_2018" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install AutoCAD 2018</field>
+            <field name="estimated_cost">1200</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_autocad_2019" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install AutoCAD 2019</field>
+            <field name="estimated_cost">1300</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_autocad_2020" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install AutoCAD 2020</field>
+            <field name="estimated_cost">1500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_autocad_2021" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install AutoCAD 2021</field>
+            <field name="estimated_cost">2000</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_autocad_2024" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install AutoCAD 2024</field>
+            <field name="estimated_cost">2500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_autocad_3ds_max_2019" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install AutoCAD Autodesk 3ds Max 2019</field>
+            <field name="estimated_cost">1500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_staad_6_2" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install STAAD 6.2</field>
+            <field name="estimated_cost">500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+                <!-- SketchUp -->
+        <record id="service_laptop_sketchup_pro_2020" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop SketchUp Pro 2020</field>
+            <field name="estimated_cost">1500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_sketchup_pro_2022" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop SketchUp Pro 2022 v22.0.316 (x64)</field>
+            <field name="estimated_cost">2000</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <!-- Autodesk & Revit -->
+        <record id="service_laptop_autodesk_advance_steel_2017" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install Autodesk Advance Steel 2017</field>
+            <field name="estimated_cost">1500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_autocad_revit_2017" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install AutoCAD Revit 2017 Software ($305/per mos)</field>
+            <field name="estimated_cost">2305</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_revit_2017" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Revit 2017</field>
+            <field name="estimated_cost">1500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_revit_2021" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Revit 2021 G1 Win 64bit (1 year)</field>
+            <field name="estimated_cost">3500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <!-- Printer & Cleaning -->
+        <record id="service_laptop_printer_drivers" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install Printers Drivers (L120/L220/L360/L210/L3110)</field>
+            <field name="estimated_cost">1500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_cleaning_software_config" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Cleaning Software &amp; Configuration No Data Loss</field>
+            <field name="estimated_cost">800</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_lumion_pro_85" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install Lumion Pro 8.5x64 (9GB)</field>
+            <field name="estimated_cost">1500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <!-- Adobe Software -->
+        <record id="service_laptop_adobe_after_effects_2020" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Adobe After Effects 2020 Multilingual</field>
+            <field name="estimated_cost">1586</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_adobe_indesign_2020" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Adobe InDesign 2020 Multilingual</field>
+            <field name="estimated_cost">1586</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_adobe_indesign_2020_sp" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Adobe InDesign 2020 SP</field>
+            <field name="estimated_cost">1500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_adobe_indesign_cs6" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Adobe InDesign CS6</field>
+            <field name="estimated_cost">650</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_adobe_animate_2020" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Adobe Animate 2020 Multilingual</field>
+            <field name="estimated_cost">1586</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_adobe_audition_2020" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Adobe Audition 2020 Multilingual</field>
+            <field name="estimated_cost">1586</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_adobe_character_animator_2020" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Adobe Character Animator 2020 Multilingual</field>
+            <field name="estimated_cost">2380</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_adobe_dimension_3" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Adobe Dimension v3.0 Multilingual</field>
+            <field name="estimated_cost">2088</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_adobe_dreamweaver_2020" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Adobe Dreamweaver 2020 Multilingual</field>
+            <field name="estimated_cost">2088</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_wondershare_filmora_6" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Wondershare Filmora 6.8.0.15 Final + Serials</field>
+            <field name="estimated_cost">300</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_wondershare_filmora_7" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Wondershare Filmora 7.8.9.1 (LaCe12)</field>
+            <field name="estimated_cost">400</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_wondershare_filmora_8" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Wondershare Filmora 8.2.2.1 (x64) Multilingual + Serial Keys</field>
+            <field name="estimated_cost">500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_filmora_9_3" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Filmora 9.3.0</field>
+            <field name="estimated_cost">600</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_adobe_illustrator_2020" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Adobe Illustrator 2020 Multilingual</field>
+            <field name="estimated_cost">2088</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_adobe_lightroom_classic_9" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Adobe Lightroom Classic v9.0 Multilingual</field>
+            <field name="estimated_cost">993.384</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_adobe_premiere_pro_cs6" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Adobe Premiere Pro CS6 6.0.0 LS7 Multilanguage</field>
+            <field name="estimated_cost">993</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_adobe_acrobat_xi" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Adobe Acrobat XI Pro + Crack</field>
+            <field name="estimated_cost">500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_adobe_acrobat_pro_dc" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Adobe Acrobat Pro DC 2019.012.20034 Mac Update Only</field>
+            <field name="estimated_cost">500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_adobe_acrobat_reader_dc" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Adobe Acrobat Reader DC</field>
+            <field name="estimated_cost">350</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_adobe_photoshop_cs4" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Adobe Photoshop CS4</field>
+            <field name="estimated_cost">150</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_adobe_photoshop_cs6" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Adobe Photoshop CS6</field>
+            <field name="estimated_cost">500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_nitro_pdf_pro_13" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Nitro PDF Pro 13</field>
+            <field name="estimated_cost">500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_autodesk_revit_mep_2016" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Autodesk Revit MEP 2016</field>
+            <field name="estimated_cost">1500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <!-- SSD/M.2/HDD Storage Services -->
+        <record id="service_laptop_install_storage_below_50gb" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install SSD/M.2 /HHD Storage (Below 50GB) Migrate OS</field>
+            <field name="estimated_cost">1000</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_storage_50gb_1tb" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install SSD/M.2 /HHD Storage (50GB Up To 1TB) Migrate OS</field>
+            <field name="estimated_cost">2500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_install_storage_50gb_4tb" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Install SSD/M.2 /HHD Storage (50GB Up To 4TB Up) Migrate OS</field>
+            <field name="estimated_cost">5000</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <!-- Adobe Premiere & Photoshop 2020 -->
+        <record id="service_laptop_adobe_premiere_pro_2020" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Adobe Premiere Pro 2020 Multilingual</field>
+            <field name="estimated_cost">1500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_adobe_photoshop_2020" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Adobe Photoshop 2020 u2 Multilingual</field>
+            <field name="estimated_cost">1500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <!-- IBM SPSS & Visual Studio -->
+        <record id="service_laptop_ibm_spss_25" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop IBM SPSS Statistics 25.0 (LaCe12)</field>
+            <field name="estimated_cost">500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <record id="service_laptop_ms_vs_2019" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop MS VS 2019 v16.3.3 (Visual Studio) Notepad with C++</field>
+            <field name="estimated_cost">1500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <!-- Reprogramming -->
+        <record id="service_laptop_reprogram_bsod" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Reprogram with BSOD Issue (Entry) (Gaming) (Premium)</field>
+            <field name="estimated_cost">800</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <!-- Bluebeam -->
+        <record id="service_laptop_bluebeam_revu_21" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_laptop"/>
+            <field name="name">Laptop Bluebeam Revu 21.1.0 Multilingual</field>
+            <field name="estimated_cost">1500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <!-- ================= DTLP – MacBook Hardware Services ================= -->
+        <record id="service_macbook_checkup" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_macbook"/>
+            <field name="name">MacBook Check-Up</field>
+            <field name="estimated_cost">0</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="service_macbook_no_power" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_macbook"/>
+            <field name="name">MacBook No Power</field>
+            <field name="estimated_cost">3500</field>
+        </record>
+        
+        <record id="service_macbook_no_display" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_macbook"/>
+            <field name="name">MacBook No Display</field>
+            <field name="estimated_cost">3500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="service_macbook_cleaning" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_macbook"/>
+            <field name="name">MacBook Cleaning</field>
+            <field name="estimated_cost">1500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="service_macbook_preventive_maintenance" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_macbook"/>
+            <field name="name">MacBook Preventive Maintenance (w/Parts or w/out) (Mobo, HDD, Mem, SSD)</field>
+            <field name="estimated_cost">350</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="service_macbook_no_lan" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_macbook"/>
+            <field name="name">MacBook No LAN/Ethernet (w/Parts or w/out)</field>
+            <field name="estimated_cost">350</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="service_macbook_grounded_repair_mobo" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_macbook"/>
+            <field name="name">MacBook Grounded / Repair Mobo Parts w/Labor</field>
+            <field name="estimated_cost">3500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+        <!-- ================= DTLP – MacBook Software Services ================= -->
+        <record id="service_macbook_reset_reprogram_reformat" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_macbook"/>
+            <field name="name">MacBook Reset / Reprogram / Reformat</field>
+            <field name="estimated_cost">2500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="service_macbook_reset_reprogram_reformat_recover" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_macbook"/>
+            <field name="name">MacBook Reset / Reprogram / Reformat w/ Recover Files</field>
+            <field name="estimated_cost">3500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="service_macbook_install_ms_office_2011" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_macbook"/>
+            <field name="name">MacBook Pro / Air Install MS Office (MS 2011) Third Party</field>
+            <field name="estimated_cost">450</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="service_macbook_install_ms_office_2016" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_macbook"/>
+            <field name="name">MacBook Pro / Air Install MS Office (MS 2016) Third Party</field>
+            <field name="estimated_cost">800</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="service_macbook_install_ms_office_2019" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_macbook"/>
+            <field name="name">MacBook Pro / Air Install MS Office (MS 2019) Third Party</field>
+            <field name="estimated_cost">1500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="service_macbook_install_ms_office_2021" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_macbook"/>
+            <field name="name">Microsoft Office 2021 for Mac LTSC v16.78.3 .part3</field>
+            <field name="estimated_cost">2000</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="service_macbook_install_autocad_2019" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_macbook"/>
+            <field name="name">MacBook Install AutoCAD 2019 Software</field>
+            <field name="estimated_cost">1500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="service_macbook_install_adobe_photoshop" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_macbook"/>
+            <field name="name">MacBook Install Adobe Photoshop Software</field>
+            <field name="estimated_cost">500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="service_macbook_install_sketchup_pro_2016" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_macbook"/>
+            <field name="name">SketchUp Pro 2016 Mac OS X</field>
+            <field name="estimated_cost">800</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+        
+        <record id="service_macbook_adobe_photoshop_cs6" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_macbook"/>
+            <field name="name">Adobe Photoshop CS6</field>
+            <field name="estimated_cost">500</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </recorsd>
+        
+        <record id="service_macbook_adobe_photoshop_2020" model="repair.problem">
+            <field name="department_id" ref="hr_department_dtlp"/>
+            <field name="unit_type_id" ref="unit_type_macbook"/>
+            <field name="name">Adobe Photoshop 2020 v2122</field>
+            <field name="estimated_cost">2000</field>
+            <field name="product_id" ref="product_service_repair_generic"/>
+        </record>
+
+    </data>
+</odoo>
+
