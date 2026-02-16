@@ -73,9 +73,6 @@ class RepairTechnicianLine(models.Model):
             ])
             previous_lines.write({'end_date': now})
 
-            # ✅ Set start_date
-            vals.setdefault('start_date', now)
-
             records |= super().create(vals)
 
         return records
