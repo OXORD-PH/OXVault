@@ -3,11 +3,11 @@
     <data>
 
         <record id="group_occ_la_hacienda" model="res.groups">
-            <field name="name">ST3-OCC (La Hacienda)</field>
+            <field name="name">ST4-OCC (La Hacienda)</field>
         </record>
 
         <record id="group_occ_robinsons" model="res.groups">
-            <field name="name">ST4-OCC (Robinsons)</field>
+            <field name="name">ST3-OCC (Robinsons)</field>
         </record>
 
         <record id="group_occ_hq" model="res.groups">
