@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-inherit="point_of_sale.ProductScreen" t-inherit-mode="extension">
+        <xpath expr="//button[contains(@class,'set-partner')]" position="after">
+            <button class="control-button"
+                    t-on-click="onClickSalesperson">
+                Salesperson
+            </button>
+        </xpath>
+    </t>
+
+</templates>
