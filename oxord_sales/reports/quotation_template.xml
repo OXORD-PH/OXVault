@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- QUOTATION REPORT TEMPLATE -->
+    <template id="quotation_template">
+        <t t-name="oxord_sales.quotation_template">
+            <main>
+
+                <t t-foreach="docs" t-as="o">
+
+                    <!-- FULL PAGE BACKGROUND -->
+                    <img
+                        t-att-src="'/oxord_repair/static/src/img/background.jpg'"
+                        style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; object-fit:cover;"
+                    />
+
+                    <style>
+                        @page { size:A4; margin:8mm; }
+                        main { page-break-after:avoid; page-break-before:avoid; }
+
+                        body {
+                            font-family: Arial, sans-serif;
+                            font-size: 13px;
+                            color:#000;
+                        }
+
+                        .oxord-body-wrapper {
+                            width:100%;
+                            padding:2mm 6mm;
+                            box-sizing:border-box;
+                        }
+
+                        .oxord-section {
+                            background-color:#e0f2f1;
+                            color:#000;
+                            padding:3px 6px;
+                            font-weight:bold;
+                            margin-top:2mm;
+                            border-left:3px solid #00796b;
+                            border-radius:3px;
+                            font-size:13px;
+                        }
+
+                        .tech-box {
+                            border:1px solid #00796b;
+                            border-radius:5px;
+                            padding:5px 7px;
+                            margin-bottom:2mm;
+                            font-size:12px;
+                        }
+
+                        table {
+                            width:100%;
+                            border-collapse:collapse;
+                        }
+
+                        th {
+                            background-color:#00796b;
+                            color:#fff;
+                            padding:6px;
+                            font-size:12px;
+                        }
+
+                        td {
+                            border:1px solid #00796b;
+                            padding:6px;
+                            font-size:12px;
+                        }
+
+                        .no-border td {
+                            border:none;
+                            padding:3px 5px;
+                        }
+
+                        .total-row {
+                            font-weight:bold;
+                            border-top:2px solid #00796b;
+                        }
+
+                        .oxord-footer {
+                            font-size:12px;
+                            color:#555;
+                            margin-top:6px;
+                            text-align:center;
+                        }
+                    </style>
+
+                    <!-- HEADER -->
+                    <table style="width:100%; border-bottom:2px solid #009688; margin-bottom:2mm;">
+                        <tr>
+                            <!-- Logo -->
+                            <td style="width:22%; padding-left:6mm;">
+                                <img t-if="o.company_id.logo"
+                                    t-att-src="'data:image/png;base64,%s' % o.company_id.logo.decode()"
+                                    style="height:50px;"
+                                    alt="Company Logo"/>
+                            </td>
+
+                            <!-- Company Info -->
+                            <td>
+                                <div style="font-weight:bold; font-size:15px;">
+                                    OXORD COMPUTER SOLUTIONS &amp; REPAIR CENTER
+                                </div>
+                                <div style="font-size:12px;">
+                                    2F Robinsons Place Roxas, Pueblo de Panay Lawa-an, Roxas City
+                                </div>
+                                <div style="font-size:12px;">
+                                    La Hacienda Annex Bldg., Arnaldo Blvd., Roxas City, Capiz
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <!-- BODY -->
+                    <div class="oxord-body-wrapper">
+
+                        <!-- QUOTATION TITLE -->
+                        <div style="font-size:20px; font-weight:bold; margin-bottom:2mm;">
+                            QUOTATION
+                        </div>
+
+                        <!-- QUOTATION DETAILS -->
+                        <div class="oxord-section">Quotation Details</div>
+                        <div class="tech-box">
+                            <table class="no-border">
+                                <tr>
+                                    <td style="width:30%;">Quotation No:</td>
+                                    <td><t t-esc="o.name"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Date:</td>
+                                    <td><t t-esc="o.date_order.strftime('%m/%d/%Y') if o.date_order else ''"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Customer:</td>
+                                    <td><t t-esc="o.partner_id.name"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Address:</td>
+                                    <td>
+                                        <t t-esc="o.partner_id.street or ''"/>
+                                        <t t-esc="o.partner_id.city or ''"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!-- INTRO TEXT -->
+                        <p style="margin-top:4mm; margin-bottom:2mm; font-size:12px;">
+                            Dear Ma'am/Sir,<br/>
+                            We are pleased to provide you with a quote for the items related to your inquiry.
+                        </p>
+
+
+                        <!-- QUOTATION LINES -->
+                        <div class="oxord-section">Quotation Items</div>
+                        <div class="tech-box">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th style="width:45%;">Description</th>
+                                        <th style="width:15%; text-align:center;">Qty</th>
+                                        <th style="width:20%; text-align:right;">Unit Price</th>
+                                        <th style="width:20%; text-align:right;">Subtotal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.order_line" t-as="line">
+
+                                        <!-- SECTION HEADER -->
+                                        <t t-if="line.display_type == 'line_section'">
+                                            <tr>
+                                                <td colspan="4" style="font-weight:bold; padding:4px 0;">
+                                                    <t t-esc="line.name"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+
+                                        <!-- NORMAL PRODUCT -->
+                                        <t t-if="not line.display_type">
+                                            <tr>
+                                                <td>
+                                                    <t t-esc="line.name"/>
+                                                </td>
+                                                <td style="text-align:center;">
+                                                    <t t-esc="line.product_uom_qty"/>
+                                                </td>
+                                                <td style="text-align:right;">
+                                                    <t t-esc="'PHP %.2f' % line.price_unit"/>
+                                                </td>
+                                                <td style="text-align:right;">
+                                                    <t t-esc="'PHP %.2f' % line.price_subtotal"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+
+                                    </t>
+
+                                    <tr class="total-row">
+                                        <td colspan="3" style="text-align:right;">TOTAL</td>
+                                        <td style="text-align:right;">
+                                            <t t-esc="'PHP %.2f' % o.amount_total"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- THANK YOU TEXT -->
+                        <div style="margin-top:2mm; font-size:12px;">
+                            Thank you for giving us opportunity to serve you.
+                        </div>
+
+                        <!-- NOTE -->
+                        <div class="oxord-section">Note</div>
+                        <div class="tech-box">
+                            Note: Prices, specifications &amp; stocks availability may change even without prior notice. For order basis items, we need approved PO first before we can process your order.
+                        </div>
+
+                                                
+                        <!-- SIGNATURES -->
+                        <div class="oxord-section">Authorized Signatures</div>
+                        <div class="tech-box" style="font-size:12px;">
+                            <table style="width:100%; margin-top:5mm; border:none;">
+                                <tr>
+                                    <!-- COLUMN 1 -->
+                                    <td style="width:25%; text-align:left; vertical-align:top;">
+                                        <div style="font-weight:bold;">
+                                            <t t-esc="o.prepared_by_id.name or '________________'"/>
+                                        </div>
+                                        Prepared By:<br/><br/>
+
+                                        <t t-if="o.signature_prepared_by">
+                                            <img t-att-src="'data:image/png;base64,%s' % o.signature_prepared_by.decode()"
+                                                style="height:70px;"/>
+                                        </t>
+
+                                        <div style="font-size:11px;">
+                                            Date: <t t-esc="o.prepared_by_date.strftime('%m/%d/%Y') if o.prepared_by_date else '________'"/>
+                                        </div>
+                                    </td>
+
+                                    <!-- COLUMN 2 -->
+                                    <td style="width:25%; text-align:left; vertical-align:top;">
+                                        <div style="font-weight:bold;">
+                                            <t t-esc="o.checked_by_id.name or '________________'"/>
+                                        </div>
+                                        Checked By (Head):<br/><br/>
+
+                                        <t t-if="o.signature_checked_by">
+                                            <img t-att-src="'data:image/png;base64,%s' % o.signature_checked_by.decode()"
+                                                style="height:70px;"/>
+                                        </t>
+
+                                        <div style="font-size:11px;">
+                                            Date: <t t-esc="o.checked_by_date.strftime('%m/%d/%Y') if o.checked_by_date else '________'"/>
+                                        </div>
+                                    </td>
+
+                                    <!-- COLUMN 3 -->
+                                    <td style="width:25%; text-align:left; vertical-align:top;">
+                                        <div style="font-weight:bold;">
+                                            <t t-esc="o.approved_by_id.name or '________________'"/>
+                                        </div>
+                                        Approved By (Chief Officer):<br/><br/>
+
+                                        <t t-if="o.signature_approved_by">
+                                            <img t-att-src="'data:image/png;base64,%s' % o.signature_approved_by.decode()"
+                                                style="height:70px;"/>
+                                        </t>
+
+                                        <div style="font-size:11px;">
+                                            Date: <t t-esc="o.approved_by_date.strftime('%m/%d/%Y') if o.approved_by_date else '________'"/>
+                                        </div>
+                                    </td>
+
+                                    <!-- COLUMN 4 -->
+                                    <td style="width:25%; text-align:left; vertical-align:top;">
+                                        <div style="font-weight:bold;">
+                                            <t t-esc="o.customer_id or o.partner_id.name or '________________'"/>
+                                        </div>
+                                        Customer:<br/><br/>
+
+                                        <t t-if="o.signature_customer">
+                                            <img t-att-src="'data:image/png;base64,%s' % o.signature_customer.decode()"
+                                                style="height:70px;"/>
+                                        </t>
+
+                                        <div style="font-size:11px;">
+                                            Date: <t t-esc="o.customer_date.strftime('%m/%d/%Y') if o.customer_date else '________'"/>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!-- FOOTER -->
+                        <div class="oxord-footer">
+                            <div>
+                                <strong>Office:</strong> (036) 522-2552 | (036) 621-3621
+                            </div>
+                            <div>
+                                <strong>Sales:</strong> 0963 045 4012
+                            </div>
+                        </div>
+
+                    </div>
+                </t>
+            </main>
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- OVERRIDE DEFAULT SALE ORDER / QUOTATION REPORT -->
+    <record id="sale.action_report_saleorder" model="ir.actions.report">
+        <field name="report_name">oxord_sales.quotation_template</field>
+        <field name="report_file">oxord_sales.quotation_template</field>
+        <field name="paperformat_id" ref="oxord_sales.paperformat_quotation"/>
+    </record>
+
+</odoo>

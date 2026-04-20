@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- CGS Group -->
+        <record id="group_sale_cgs" model="res.groups">
+            <field name="name">Sales User</field>
+        </record>
+
+        <!-- Validator Group -->
+        <record id="group_sale_validator" model="res.groups">
+            <field name="name">Sales Validator</field>
+        </record>
+
+        <!-- Approver Group -->
+        <record id="group_sale_approver" model="res.groups">
+            <field name="name">Sales Approver</field>
+        </record>
+
+        <!-- ROS Group -->
+        <record id="group_sale_ros" model="res.groups">
+            <field name="name">ROS User</field>
+        </record>
+
+    </data>
+</odoo>

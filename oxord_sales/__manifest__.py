@@ -1,0 +1,27 @@
+{
+    "name": "Oxord Sales Quotation",
+    "version": "1.0.0",
+    "category": "Sales",
+    "summary": "Custom quotation layout for Oxord Computer Solutions",
+    "author": "Oxord",
+    "depends": [
+        "sale",
+    ],
+    "data": [
+        "security/groups.xml",
+        'security/ir.model.access.csv',
+        "reports/quotation_template.xml",
+        "reports/report_action.xml",
+        "reports/report_override.xml",
+        "views/customer_approval_wizard.xml",
+        "views/notify_validator_wizard.xml",
+        "views/notify_approver_wizard.xml",
+        "views/prepared_wizard.xml",
+        "views/validate_wizard.xml",
+        "views/approve_wizard.xml",
+        "views/sale_order_view.xml",
+    ],
+    "installable": True,
+    "application": False,
+    "license": "LGPL-3",
+}

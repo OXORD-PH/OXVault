@@ -1,0 +1,36 @@
+<odoo>
+    <!-- Wizard Form -->
+    <record id="view_sale_order_prepared_wizard_form" model="ir.ui.view">
+        <field name="name">sale.order.prepared.wizard.form</field>
+        <field name="model">sale.order.prepared.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Prepared By Verification">
+                <group string="Prepared By Details">
+                    <field name="prepared_by_id"/>
+                    <field name="sale_order_id" invisible="1"/>
+                    <field name="signature_prepared_by" widget="signature"/>
+                </group>
+
+                <footer>
+                    <button name="action_sign_prepared"
+                            type="object"
+                            string="Sign &amp; Continue"
+                            class="btn-primary"/>
+                    <button string="Cancel"
+                            special="cancel"
+                            class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for Wizard -->
+    <record id="action_verification_prepared_wizard" model="ir.actions.act_window">
+        <field name="name">Prepared By Verification</field>
+        <field name="res_model">sale.order.prepared.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_sale_order_prepared_wizard_form"/>
+        <field name="target">new</field>
+        <field name="context">{'default_sale_order_id': active_id}</field>
+    </record>
+</odoo>

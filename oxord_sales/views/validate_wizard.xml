@@ -1,0 +1,38 @@
+<odoo>
+    <!-- Wizard Form -->
+    <record id="view_sale_order_verification_wizard_form" model="ir.ui.view">
+        <field name="name">sale.order.verification.wizard.form</field>
+        <field name="model">sale.order.verification.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Sale Order Validation">
+
+
+                <group string="Checked By (Head)">
+                    <field name="checked_by_id"/>
+                    <field name="checked_by_date" readonly="1"/>
+                    <field name="signature_checked_by" widget="signature"/>
+                </group>
+
+                <footer>
+                    <button name="action_confirm_verification"
+                            type="object"
+                            string="Confirm &amp; Continue"
+                            class="btn-primary"/>
+                    <button string="Cancel"
+                            special="cancel"
+                            class="btn-secondary"/>
+                </footer>
+
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for Wizard -->
+    <record id="action_sale_order_verification_wizard" model="ir.actions.act_window">
+        <field name="name">Verification</field>
+        <field name="res_model">sale.order.verification.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_sale_order_verification_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

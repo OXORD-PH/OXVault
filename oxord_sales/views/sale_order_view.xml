@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_sale_order_form_oxord_quotation" model="ir.ui.view">
+        <field name="name">sale.order.form.oxord.quotation</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+            <!-- ========================= -->
+            <!-- HEADER BUTTONS -->
+            <!-- ========================= -->
+            <xpath expr="//header" position="inside">
+
+                <button name="action_preview_quotation"
+                        type="object"
+                        string="PDF"
+                        class="btn-secondary"
+                        groups="oxord_sales.group_sale_validator"
+                        invisible="state != 'sale'"/>
+
+                <button name="%(action_notify_validator_wizard)d"
+                        type="action"
+                        string="Notify Validator"
+                        class="btn-info"
+                        groups="oxord_sales.group_sale_cgs"
+                        invisible="state != 'for_approval' or notify_validator_sent"
+                        context="{'default_sale_order_id': id}"/>
+
+                <button name="%(action_notify_approver_wizard)d"
+                        type="action"
+                        string="Notify Approver"
+                        class="btn-warning"
+                        groups="oxord_sales.group_sale_cgs"
+                        invisible="state != 'approval' or notify_approver_sent"
+                        context="{'default_sale_order_id': id}"/>
+
+                <button name="%(action_verification_prepared_wizard)d"
+                        type="action"
+                        string="Proceed"
+                        class="btn-primary"
+                        groups="oxord_sales.group_sale_cgs,base.group_system"
+                        invisible="state != 'draft' and state != 'sent'"/>
+
+                <!-- Send for Verification -->
+                <button name="%(action_sale_order_verification_wizard)d"
+                        type="action"
+                        string="Validate"
+                        class="btn-primary"
+                        groups="oxord_sales.group_sale_validator,base.group_system"
+                        invisible="state != 'for_approval'
+                                or not notify_validator_sent
+                                or validator_user_id != uid"/>
+
+                <!-- Approve (Chief Officer Signature Wizard) -->
+                <button name="%(action_chief_officer_wizard)d"
+                        type="action"
+                        string="Approve"
+                        class="btn-warning"
+                        groups="oxord_sales.group_sale_approver,base.group_system"
+                        invisible="state != 'approval'
+                                or not notify_approver_sent
+                                or approver_user_id != uid"/>
+
+                <!-- Customer Approval Button -->
+                <button name="%(action_customer_approval_wizard)d"
+                        type="action"
+                        string="Customer Approve"
+                        class="btn-success"
+                        groups="oxord_sales.group_sale_cgs,base.group_system"
+                        invisible="state != 'customer_approval'"/>
+                        
+                <!-- Confirm (ROS) -->
+                <button name="action_confirm"
+                        type="object"
+                        string="Confirm"
+                        class="btn-primary"
+                        groups="oxord_sales.group_sale_ros,base.group_system"
+                        invisible="state not in ('draft','sent')"/>
+            
+            </xpath>
+
+            <!-- ========================= -->
+            <!-- HIDE CREATE INVOICE FOR CGS -->
+            <!-- ========================= -->
+            <xpath expr="//button[@id='create_invoice']" position="attributes">
+                <attribute name="groups">!oxord_sales.group_sale_cgs</attribute>
+            </xpath>
+
+            <xpath expr="//button[@id='create_invoice_percentage']" position="attributes">
+                <attribute name="groups">!oxord_sales.group_sale_cgs</attribute>
+            </xpath>
+
+            <!--  =========================  -->
+            <!--  ENSURE BUTTON BOX IS VISIBLE  -->
+            <!--  =========================  -->
+            <xpath expr="//div[@name='button_box']" position="attributes">
+            <attribute name="invisible">0</attribute>
+            </xpath>
+
+            <!-- ========================= -->
+            <!-- MODIFY DEFAULT SEND BUTTONS -->
+            <!-- ========================= -->
+            <xpath expr="//button[@id='quotation_send']" position="attributes">
+                <attribute name="invisible">
+                    state not in ('sent', 'customer_approval')
+                </attribute>
+            </xpath>
+
+
+            <!-- ========================= -->
+            <!-- REMOVE DEFAULT CONFIRM BUTTON -->
+            <!-- ========================= -->
+            <xpath expr="//header/button[@id='action_confirm']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+
+            <!-- ========================= -->
+            <!-- STATUSBAR -->
+            <!-- ========================= -->
+            <xpath expr="//field[@name='state']" position="replace">
+
+                <field name="state"
+                    widget="statusbar"
+                    statusbar_visible="draft,sent,for_approval,approval,customer_approval,sale"/>
+
+            </xpath>
+
+            <!-- ========================= -->
+            <!-- REMOVE OLD CUSTOMER SIGNATURE TAB -->
+            <!-- ========================= -->
+            <xpath expr="//page[@name='customer_signature']" position="replace">
+                <!-- Replaced by new Signatures tab -->
+            </xpath>
+
+            <!-- ========================= -->
+            <!-- ADD NEW SIGNATURES TAB -->
+            <!-- ========================= -->
+            <xpath expr="//notebook" position="inside">
+                <page string="Signatures" name="signatures_tab">
+
+                    <!-- ========================= -->
+                    <!-- VERIFICATION -->
+                    <!-- ========================= -->
+                    <group col="2" string="Verification (Prepared &amp; Checked)" 
+                           invisible="not (signature_prepared_by or signature_checked_by)">
+
+                        <!-- Prepared By -->
+                        <group>
+                            <field name="prepared_by_id" readonly="1"/>
+                            <field name="prepared_by_date" readonly="1"/>
+                            <field name="signature_prepared_by" widget="signature" readonly="1"/>
+                        </group>
+
+                        <!-- Checked By -->
+                        <group>
+                            <field name="checked_by_id" readonly="1"/>
+                            <field name="checked_by_date" readonly="1"/>
+                            <field name="signature_checked_by" widget="signature" readonly="1"/>
+                        </group>
+
+                    </group>
+
+                    <!-- ========================= -->
+                    <!-- APPROVAL -->
+                    <!-- ========================= -->
+                    <group col="2" string="Approval (Chief Officer)" invisible="not signature_approved_by">
+
+                        <group>
+                            <field name="approved_by_id" readonly="1"/>
+                            <field name="approved_by_date" readonly="1"/>
+                            <field name="signature_approved_by" widget="signature" readonly="1"/>
+                        </group>
+
+                        <!-- Optional blank column -->
+                        <group>
+                        </group>
+
+                    </group>
+
+                    <!-- ========================= -->
+                    <!-- CUSTOMER/INTERNAL -->
+                    <!-- ========================= -->
+                    <group col="2" string="Customer/Internal" invisible="not signature_customer">
+
+                        <group>
+                            <field name="customer_id" readonly="1"/>
+                            <field name="customer_date" readonly="1"/>
+                            <field name="signature_customer" widget="signature" readonly="1"/>
+                        </group>
+
+                        <group>
+                        </group>
+
+                    </group>
+
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

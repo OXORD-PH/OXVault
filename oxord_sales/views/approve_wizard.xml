@@ -1,0 +1,35 @@
+<odoo>
+    <!-- Wizard Form -->
+    <record id="view_sale_order_approval_wizard_form" model="ir.ui.view">
+        <field name="name">sale.order.approval.wizard.form</field>
+        <field name="model">sale.order.approval.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Chief Officer Approval">
+                <group string="Approval Details">
+                    <field name="approved_by_id"/>
+                    <field name="approved_by_date" readonly="1"/>
+                    <field name="signature_approved_by" widget="signature"/>
+                </group>
+
+                <footer>
+                    <button name="action_confirm_approval"
+                            type="object"
+                            string="Approve &amp; Continue"
+                            class="btn-primary"/>
+                    <button string="Cancel"
+                            special="cancel"
+                            class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for Wizard -->
+    <record id="action_chief_officer_wizard" model="ir.actions.act_window">
+        <field name="name">Chief Officer Approval</field>
+        <field name="res_model">sale.order.approval.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_sale_order_approval_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>
